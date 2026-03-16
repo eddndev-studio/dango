@@ -3,8 +3,7 @@
 /* Kismis Font */
 @font-face {
   font-family: 'Kismis';
-  src: url('/fonts/Kismis.otf') format('opentype'),
-    url('/fonts/Kismis.ttf') format('truetype');
+  src: url('/fonts/Kismis.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -13,8 +12,7 @@
 /* Aloevera Font */
 @font-face {
   font-family: 'Aloevera';
-  src: url('/fonts/AloeveraDisplay-Regular.otf') format('opentype'),
-    url('/fonts/AloeveraDisplay-Regular.ttf') format('truetype');
+  src: url('/fonts/AloeveraDisplay-Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -22,8 +20,7 @@
 
 @font-face {
   font-family: 'Aloevera';
-  src: url('/fonts/AloeveraDisplay-Medium.otf') format('opentype'),
-    url('/fonts/AloeveraDisplay-Medium.ttf') format('truetype');
+  src: url('/fonts/AloeveraDisplay-Medium.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -31,8 +28,7 @@
 
 @font-face {
   font-family: 'Aloevera';
-  src: url('/fonts/AloeveraDisplay-SemiBold.otf') format('opentype'),
-    url('/fonts/AloeveraDisplay-SemiBold.ttf') format('truetype');
+  src: url('/fonts/AloeveraDisplay-SemiBold.otf') format('opentype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;

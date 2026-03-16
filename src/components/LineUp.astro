@@ -248,15 +248,6 @@ const HeartSeparator = `
         // --- ARTIST HOVER LOGIC ---
         const artistLinks = document.querySelectorAll(".hover-artist");
 
-        // Preload images
-        artistLinks.forEach((link) => {
-            const imgUrl = link.getAttribute("data-image");
-            if (imgUrl) {
-                const img = new Image();
-                img.src = imgUrl;
-            }
-        });
-
         artistLinks.forEach((link) => {
             link.addEventListener("mouseenter", () => {
                 (link as HTMLElement).style.color = getRandomDangoColor();

@@ -21,7 +21,7 @@ const displayIcons = [...iconNames, ...iconNames, ...iconNames, ...iconNames];
     {
       displayIcons.map((icon) => (
         <div class="slider-item">
-          <img src={`/icons/${icon}`} alt="Festival Icon" class="icon-img" />
+          <img src={`/icons/${icon}`} alt="" class="icon-img" loading="lazy" decoding="async" />
         </div>
       ))
     }

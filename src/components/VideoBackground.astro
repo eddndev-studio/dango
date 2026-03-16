@@ -25,9 +25,12 @@ const videoType = videoSrc ? 'local' : 'none';
                 Tu navegador no soporta el elemento de video.
             </video>
         ) : (
-            <div
-                class="video-bg bg-cover bg-center"
-                style={`background-image: url(${backgroundImage})`}
+            <img
+                src={backgroundImage}
+                alt=""
+                class="video-bg-img"
+                fetchpriority="high"
+                decoding="async"
             />
         )
     }
@@ -73,6 +76,15 @@ const videoType = videoSrc ? 'local' : 'none';
         background: black; /* Base negra para el overlay */
         z-index: 1;
         pointer-events: none;
+    }
+
+    .video-bg-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
     }
 
     .video-content {
