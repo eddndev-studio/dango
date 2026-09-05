@@ -1,454 +1,67 @@
 ---
-import IconSlider from "./IconSlider.astro";
-import RotatingBackground from "./RotatingBackground.astro";
-
-// Heart SVG for separators
-const HeartSeparator = `
-<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="inline-block mx-4 heart-separator">
-  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-</svg>
-`;
+import { artists } from '../data/site';
+import media from '../data/media.json';
 ---
 
-<section id="lineup" class="lineup-section">
-    <!-- Top Slider (Left to Right) -->
-    <div class="absolute top-0 w-full z-20">
-        <IconSlider direction="right" />
+<section id="lineup" class="lineup section-pad" aria-labelledby="lineup-title">
+  <div class="shell">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">01 / El sonido de Dängo</p><h2 id="lineup-title">
+          Un cartel.<br /><span class="pink">Muchas formas de sentir.</span>
+        </h2>
+      </div><span class="edition-stamp"
+        >LINE UP<br /><strong>2026</strong></span>
     </div>
-
-    <!-- Rotating Background (Base Layer) -->
-    <RotatingBackground />
-
-    <!-- Artist Hover Background (Overlay Layer) -->
-    <div
-        id="artist-bg-container"
-        class="absolute inset-0 pointer-events-none z-0 opacity-0 transition-opacity duration-500 ease-in-out bg-black flex justify-center items-center overflow-hidden"
-    >
-        <img
-            id="artist-bg-image"
-            src=""
-            alt=""
-            class="h-full w-auto max-w-none object-contain brightness-50 scale-110 transition-transform duration-100 ease-out"
-        />
-
-        <!-- Masks -->
-        <div
-            class="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-black via-black/50 to-transparent z-10"
-        >
-        </div>
-        <div
-            class="absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-black via-black/50 to-transparent z-10"
-        >
-        </div>
-        <div
-            class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-90 z-10"
-        >
-        </div>
+    <div class="artist-poster">
+      <div class="artist-backdrop" aria-hidden="true"></div>
+      <div class="artist-list">
+        {
+          [1, 2, 3].map((tier) => (
+            <div class:list={['artist-tier', `tier-${tier}`]}>
+              {artists
+                .filter((a) => a.tier === tier)
+                .map((artist) => (
+                  <a
+                    href={`https://www.instagram.com/${artist.handle}/`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-image={
+                      media[
+                        `/images/artistas/${artist.image}` as keyof typeof media
+                      ]?.full
+                    }
+                  >
+                    {artist.name}
+                  </a>
+                ))}
+            </div>
+          ))
+        }
+      </div>
+      <p class="poster-note">
+        Rock, indie y sonidos urbanos. Una misma energía.
+      </p>
     </div>
-
-    <!-- Hearts Container for floating animation -->
-    <div class="hearts-container"></div>
-
-    <!-- Artist Layout -->
-    <div class="container mx-auto px-4 py-4 relative z-10 text-center">
-        <!-- Headliners -->
-        <div class="flex flex-col items-center gap-2 mb-4">
-            <a
-                href="https://www.instagram.com/elbogueto/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="artist-name headline hover-artist"
-                id="el-bogueto"
-                data-artist="EL BOGUETO"
-                data-image="/images/artistas/bogueto.webp"
-            >
-                EL BOGUETO
-            </a>
-            <a
-                href="https://www.instagram.com/thelittlejesus/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="artist-name headline hover-artist"
-                id="little-jesus"
-                data-artist="LITTLE JESUS"
-                data-image="/images/artistas/Little.webp"
-            >
-                LITTLE JESUS
-            </a>
-        </div>
-
-        <!-- Accent Artist -->
-        <div class="mb-4">
-            <a
-                href="https://www.instagram.com/odisseomx/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="artist-name accent-headline hover-artist"
-                data-artist="ODISSEO"
-                data-image="/images/artistas/odiseeo.webp"
-            >
-                ODISSEO
-            </a>
-        </div>
-
-        <!-- Paired Artists -->
-        <div class="flex flex-col gap-3 items-center justify-center">
-            <!-- Row 1 -->
-            <div class="artist-row">
-                <a
-                    href="https://www.instagram.com/cachirulaa/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="artist-name mid hover-artist"
-                    data-image="/images/artistas/Cachichi.webp">CACHIRULA</a
-                >
-                <span class="text-white" set:html={HeartSeparator} />
-                <a
-                    href="https://www.instagram.com/kinkytheband/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="artist-name mid hover-artist"
-                    data-image="/images/artistas/kinky.webp">KINKY</a
-                >
-            </div>
-
-            <!-- Row 2 -->
-            <div class="artist-row">
-                <a
-                    href="https://www.instagram.com/loojanmusic/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="artist-name mid hover-artist"
-                    data-image="/images/artistas/Loojan.webp">LOOJAN</a
-                >
-                <span class="text-white" set:html={HeartSeparator} />
-                <a
-                    href="https://www.instagram.com/javier_blake/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="artist-name mid hover-artist"
-                    data-image="/images/artistas/JavierBlake.webp"
-                    >JAVIER BLAKE</a
-                >
-            </div>
-
-            <!-- Row 3 -->
-            <div class="artist-row">
-                <a
-                    href="https://www.instagram.com/yeyotqm/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="artist-name mid hover-artist"
-                    data-image="/images/artistas/Yeyo.webp">YEYO</a
-                >
-                <span class="text-white" set:html={HeartSeparator} />
-                <a
-                    href="https://www.instagram.com/serenomorenito/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="artist-name mid hover-artist"
-                    data-image="/images/artistas/DoonyGraff2.webp"
-                    >DOONY GRAFF</a
-                >
-            </div>
-
-            <!-- Row 4 -->
-            <div class="artist-row">
-                <a
-                    href="https://www.instagram.com/alanisyuki/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="artist-name small hover-artist"
-                    data-image="/images/artistas/Alanisyuki.webp">ALANIS YUKI</a
-                >
-                <span class="text-white" set:html={HeartSeparator} />
-                <a
-                    href="https://www.instagram.com/plastikboy/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="artist-name small hover-artist"
-                    data-image="/images/artistas/Plastik.webp">PLASTIKBOY</a
-                >
-            </div>
-        </div>
-
-        <!-- Bottom Artist -->
-        <div class="mt-4">
-            <a
-                href="https://www.instagram.com/dennalaporri/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="artist-name small hover-artist"
-                data-artist="DENNA LA PORRI"
-                data-image="/images/artistas/Denna.webp"
-            >
-                DENNA LA PORRI
-            </a>
-        </div>
-
-        <!-- CTA Button -->
-        <div class="absolute bottom-8 left-4 text-left z-30 hidden md:block">
-            <a
-                href="https://arema.mx/e/16435/Festival-Dango-2026"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-white text-xl font-bold tracking-[0.2em] font-outfit border border-white/30 px-6 py-2 rounded-full hover:bg-white/10 transition-all duration-300 block"
-            >
-                COMPRA TUS BOLETOS
-            </a>
-        </div>
-    </div>
-
-    <!-- Bottom Slider (Right to Left) -->
-    <div class="absolute bottom-0 w-full z-20">
-        <IconSlider direction="left" />
-    </div>
+  </div>
 </section>
-
 <script>
-    import { gsap } from "gsap";
-    import { getRandomDangoColor } from "../utils/colorUtils";
-
-    document.addEventListener("astro:page-load", () => {
-        // Match EL BOGUETO width to LITTLE JESUS
-        const elBogueto = document.getElementById("el-bogueto");
-        const littleJesus = document.getElementById("little-jesus");
-        const artistBgContainer = document.getElementById(
-            "artist-bg-container",
-        );
-        const artistBgImage = document.getElementById(
-            "artist-bg-image",
-        ) as HTMLImageElement;
-        const lineupSection = document.getElementById("lineup");
-
-        const adjustFont = () => {
-            if (!elBogueto || !littleJesus) return;
-
-            // Reset to original to measure correctly if resizing down
-            elBogueto.style.fontSize = "";
-
-            const targetWidth = littleJesus.getBoundingClientRect().width;
-            const currentWidth = elBogueto.getBoundingClientRect().width;
-
-            if (currentWidth === 0) return;
-
-            const currentFontSize = parseFloat(
-                window.getComputedStyle(elBogueto).fontSize,
-            );
-            const newFontSize = currentFontSize * (targetWidth / currentWidth);
-
-            elBogueto.style.fontSize = `${newFontSize}px`;
-        };
-
-        // Initial adjust
-        // Small timeout to ensure fonts are loaded/rendering
-        setTimeout(adjustFont, 50);
-        window.addEventListener("resize", adjustFont);
-
-        // --- ARTIST HOVER LOGIC ---
-        const artistLinks = document.querySelectorAll(".hover-artist");
-
-        artistLinks.forEach((link) => {
-            link.addEventListener("mouseenter", () => {
-                (link as HTMLElement).style.color = getRandomDangoColor();
-
-                // Background Image Change
-                const imgUrl = link.getAttribute("data-image");
-                if (imgUrl && artistBgContainer && artistBgImage) {
-                    artistBgImage.src = imgUrl;
-                    artistBgContainer.classList.remove("opacity-0");
-                    artistBgContainer.classList.add("opacity-100");
-                }
-
-                // Create a burst of hearts throughout the viewport
-                const heartsContainer =
-                    document.querySelector(".hearts-container");
-                if (heartsContainer) {
-                    for (let i = 0; i < 5; i++) {
-                        createRandomHeart(heartsContainer as HTMLElement);
-                    }
-                }
-            });
-
-            link.addEventListener("mouseleave", () => {
-                (link as HTMLElement).style.color = "";
-
-                // Hide Background
-                if (artistBgContainer) {
-                    artistBgContainer.classList.remove("opacity-100");
-                    artistBgContainer.classList.add("opacity-0");
-                }
-            });
-
-            // Also add some random hearts while moving mouse over name
-            link.addEventListener("mousemove", () => {
-                if (Math.random() > 0.7) {
-                    // Rate limiter
-                    const heartsContainer =
-                        document.querySelector(".hearts-container");
-                    if (heartsContainer) {
-                        createRandomHeart(heartsContainer as HTMLElement);
-                    }
-                }
-            });
-        });
-
-        // --- PARALLAX EFFECT ---
-        if (lineupSection && artistBgImage) {
-            lineupSection.addEventListener("mousemove", (e) => {
-                // Calculate mouse position relative to center
-                const x = (e.clientX / window.innerWidth - 0.5) * 2; // -1 to 1
-                const y = (e.clientY / window.innerHeight - 0.5) * 2; // -1 to 1
-
-                // Move image slightly in opposite direction
-                // We use transform directly for performance
-                // Note: We maintain scale-110 (from class) by adding it here or CSS handles it?
-                // CSS transition handles smooth movement.
-                // We need to keep the scale.
-
-                const moveX = -x * 20; // Move up to 20px
-                const moveY = -y * 20;
-
-                artistBgImage.style.transform = `scale(1.1) translate(${moveX}px, ${moveY}px)`;
-            });
-        }
+  const backdrop = document.querySelector<HTMLElement>('.artist-backdrop');
+  const hover = matchMedia(
+    '(hover: hover) and (prefers-reduced-motion: no-preference)',
+  );
+  document
+    .querySelectorAll<HTMLAnchorElement>('.artist-list a')
+    .forEach((link) => {
+      const show = () => {
+        if (!backdrop || !hover.matches || !link.dataset.image) return;
+        backdrop.style.backgroundImage = `url("${link.dataset.image}")`;
+        backdrop.classList.add('visible');
+      };
+      const hide = () => backdrop?.classList.remove('visible');
+      link.addEventListener('mouseenter', show);
+      link.addEventListener('mouseleave', hide);
+      link.addEventListener('focus', show);
+      link.addEventListener('blur', hide);
     });
-
-    function createRandomHeart(container: HTMLElement) {
-        const heart = document.createElement("div");
-        heart.classList.add("heart");
-        heart.textContent = "♥";
-
-        // Random position in viewport (fixed container)
-        const x = Math.random() * window.innerWidth;
-        const y = Math.random() * window.innerHeight;
-
-        // Apply ALL positioning styles inline to ensure they take effect
-        heart.style.cssText = `
-          position: absolute;
-          left: ${x}px;
-          top: ${y}px;
-          font-size: ${1 + Math.random() * 2}rem;
-          color: ${getRandomDangoColor()};
-          pointer-events: none;
-        `;
-
-        container.appendChild(heart);
-
-        // Random float direction
-        const xMove = (Math.random() - 0.5) * 100;
-
-        gsap.to(heart, {
-            y: -100 - Math.random() * 100,
-            x: xMove,
-            opacity: 0,
-            rotation: Math.random() * 90 - 45,
-            duration: 1 + Math.random() * 2,
-            ease: "power2.out",
-            onComplete: () => heart.remove(),
-        });
-    }
 </script>
-
-<style>
-    .lineup-section {
-        height: calc(100vh - var(--navbar-height));
-        scroll-margin-top: var(--navbar-height);
-        background: #000;
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .hearts-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        pointer-events: none;
-        z-index: 9999;
-        overflow: hidden;
-    }
-
-    .heart {
-        position: absolute;
-        font-size: 2rem;
-        pointer-events: none;
-    }
-
-    .artist-name {
-        display: inline-block;
-        font-family: var(--font-kismis);
-        font-weight: bold;
-        color: #fff;
-        text-transform: uppercase;
-        transition: all 0.3s ease;
-        letter-spacing: 0.05em;
-        cursor: pointer;
-        line-height: 1;
-    }
-
-    .headline {
-        font-size: 4rem; /* 64px */
-    }
-
-    .accent-headline {
-        font-size: 4rem; /* 80px */
-        color: #fff;
-    }
-
-    .mid {
-        font-size: 2.25rem; /* 36px */
-    }
-
-    .small {
-        font-size: 22px; /* 22px */
-    }
-
-    .artist-row {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-    }
-
-    .artist-name:hover {
-        transform: scale(1.1);
-    }
-
-    /* Heart separator animation */
-    .heart-separator {
-        animation: pulse 2s infinite ease-in-out;
-    }
-
-    @keyframes pulse {
-        0% {
-            transform: scale(1);
-        }
-        50% {
-            transform: scale(1.2);
-        }
-        100% {
-            transform: scale(1);
-        }
-    }
-
-    @media (max-width: 768px) {
-        .headline {
-            font-size: 2.5rem;
-        }
-        .accent-headline {
-            font-size: 3rem;
-        }
-        .mid {
-            font-size: 1.5rem;
-        }
-        .artist-row {
-            gap: 0.25rem;
-        }
-    }
-</style>

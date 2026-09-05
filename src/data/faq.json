@@ -3,24 +3,24 @@
     "category": "UBICACIÓN Y LLEGADA",
     "items": [
       {
-        "question": "¿En dónde se realizará el festival?",
-        "answer": "El Festival Dängo tendrá lugar en el Rancho La Ventilla, ubicado en Teotihuacán, Estado de México. Es un espacio con una atmósfera cultural única, ideal para conectar con el entorno histórico de la zona."
+        "question": "¿Cuál fue la sede de la edición 2026?",
+        "answer": "La sede de Festival Dängo 2026 fue Rancho La Ventilla, en Teotihuacán, Estado de México."
       },
       {
-        "question": "¿Por dónde será el ingreso al evento?",
-        "answer": "El acceso principal para todos los asistentes será exclusivamente por la Puerta 3 del Rancho La Ventilla."
+        "question": "¿Por dónde se accedía al evento?",
+        "answer": "El acceso anunciado para la edición 2026 fue la Puerta 3 de Rancho La Ventilla."
       },
       {
-        "question": "¿Cómo puedo llegar en auto o Uber?",
-        "answer": "Puedes navegar directamente hacia \"Rancho La Ventilla\" en aplicaciones como Google Maps o Waze. Asegúrate de dirigirte hacia la Puerta 3."
+        "question": "¿Dónde puedo consultar la ubicación del recinto?",
+        "answer": "Consulta <a href=\"https://maps.app.goo.gl/U6Qg8WUuiFKTN9e5A\" target=\"_blank\" rel=\"noopener noreferrer\">Rancho La Ventilla en Google Maps</a>. La referencia de acceso de la edición 2026 fue la Puerta 3."
       },
       {
-        "question": "¿Cómo puedo llegar en transporte público?",
-        "answer": "Debes tomar un autobús con dirección a Teotihuacán desde la Terminal del Norte en la CDMX. Una vez en el centro de Teotihuacán, puedes llegar al Rancho caminando o mediante un taxi local o Uber."
+        "question": "¿Qué ruta de transporte público se recomendó?",
+        "answer": "La guía de la edición 2026 recomendaba salir de la Terminal del Norte en CDMX rumbo a Teotihuacán y completar el trayecto al rancho en transporte local. Para una visita futura, verifica las rutas y horarios vigentes."
       },
       {
-        "question": "¿Habrá estacionamiento en el lugar?",
-        "answer": "Sí, contamos con estacionamiento dentro del recinto con costo adicional. Te recomendamos llegar temprano ya que el cupo es limitado."
+        "question": "¿Qué se anunció sobre el estacionamiento?",
+        "answer": "Para la edición 2026 se anunció estacionamiento dentro del recinto, con costo adicional y cupo limitado."
       }
     ]
   },
@@ -28,28 +28,28 @@
     "category": "BOLETOS Y PAGOS",
     "items": [
       {
-        "question": "¿Dónde puedo adquirir mis boletos?",
-        "answer": "La venta oficial es exclusivamente a través de la plataforma arema.mx o Puntos de Venta. <br><a href='https://www.instagram.com/p/DRx1cCnDA77/?img_index=2' target='_blank' rel='noopener noreferrer' class='text-dango-pink hover:text-white transition-colors underline decoration-dango-pink underline-offset-4'>Ver Puntos de Venta Oficiales</a>"
+        "question": "¿Dónde se vendieron los boletos de la edición 2026?",
+        "answer": "La edición 2026 ya concluyó. La venta oficial se realizó a través de <a href=\"https://arema.mx/e/16435/Festival-Dango-2026\" target=\"_blank\" rel=\"noopener noreferrer\">Arema</a> y los <a href=\"https://www.instagram.com/p/DRx1cCnDA77/?img_index=2\" target=\"_blank\" rel=\"noopener noreferrer\">puntos de venta oficiales</a>. Estos enlaces se conservan como referencia de esa edición."
       },
       {
-        "question": "¿Qué tipos de boletos hay disponibles?",
-        "answer": "Para esta edición contamos únicamente con Acceso General, permitiendo que todos los asistentes disfruten de la experiencia completa por igual."
+        "question": "¿Qué tipo de acceso se ofreció en 2026?",
+        "answer": "La edición 2026 anunció únicamente Acceso General."
       },
       {
-        "question": "¿Puedo comprar boletos a meses sin intereses?",
-        "answer": "¡Sí! Tienes la opción de comprar tus boletos a 3 o 6 meses sin intereses directamente al realizar tu pago en la ticketera."
+        "question": "¿Qué opciones de pago se anunciaron?",
+        "answer": "La información de la edición 2026 mencionaba pagos a 3 o 6 meses sin intereses a través de la ticketera. Esta referencia histórica no implica que la promoción siga vigente."
       },
       {
-        "question": "¿A partir de qué edad pagan boleto los niños?",
-        "answer": "El festival es para todas las edades. Los niños pagan boleto a partir de los 8 años cumplidos."
+        "question": "¿Cuál fue la política de acceso para menores?",
+        "answer": "La información de la edición 2026 indicaba que el festival era para todas las edades y que los niños pagaban boleto a partir de los 8 años cumplidos."
       },
       {
-        "question": "¿Qué pasa si pierdo mi boleto físico o digital?",
-        "answer": "Por políticas de seguridad y control, no existen reimpresiones ni reposiciones de boletos. Te sugerimos guardarlos en un lugar seguro."
+        "question": "¿Qué política se publicó sobre boletos extraviados?",
+        "answer": "La política publicada para la edición 2026 indicaba que no había reimpresiones ni reposiciones de boletos físicos o digitales. Para consultas sobre una compra, contacta al organizador o a la ticketera."
       },
       {
-        "question": "¿Se van a agotar los boletos?",
-        "answer": "Existe una alta posibilidad de que se agoten pronto debido a la excelente respuesta que estamos recibiendo. Una vez agotados, no habrá más boletos a la venta, por lo que te sugerimos asegurar los tuyos lo antes posible."
+        "question": "¿Hay boletos disponibles para una próxima edición?",
+        "answer": "La información de esta página corresponde a 2026. Consulta los próximos anuncios en <a href=\"https://www.instagram.com/festivaldango/\" target=\"_blank\" rel=\"noopener noreferrer\">el Instagram oficial de Festival Dängo</a> antes de realizar una compra."
       }
     ]
   },
@@ -57,20 +57,20 @@
     "category": "HORARIOS Y REGLAS",
     "items": [
       {
-        "question": "¿A qué hora es la apertura de puertas?",
-        "answer": "El acceso al recinto comenzará a partir de las 12:30 PM."
+        "question": "¿Qué horario de apertura se anunció?",
+        "answer": "La apertura de puertas anunciada para la edición 2026 fue a las 12:30 p. m."
       },
       {
-        "question": "¿A qué hora termina el festival?",
-        "answer": "El cierre del evento está programado para las 2:00 AM."
+        "question": "¿Qué hora de cierre estaba programada?",
+        "answer": "El cierre de la edición 2026 estaba programado para las 2:00 a. m."
       },
       {
-        "question": "¿Puedo entrar al festival en cualquier horario?",
-        "answer": "Podrás ingresar al festival como máximo hasta 3 horas antes de que inicie la última presentación del lineup."
+        "question": "¿Cuál era el límite de horario para entrar?",
+        "answer": "Las condiciones de la edición 2026 indicaban que el ingreso se permitía hasta tres horas antes del inicio de la última presentación del cartel."
       },
       {
-        "question": "¿Puedo salir del festival y volver a entrar?",
-        "answer": "No. Por seguridad de todos, los reingresos no están permitidos. Si sales del recinto, tu boleto perderá su validez y no podrás volver a entrar con él."
+        "question": "¿Se permitían reingresos?",
+        "answer": "La política publicada para la edición 2026 no permitía reingresos: al salir del recinto, el boleto perdía su validez."
       }
     ]
   },
@@ -78,28 +78,28 @@
     "category": "SERVICIOS Y SEGURIDAD",
     "items": [
       {
-        "question": "¿Hay acceso y zonas para personas con discapacidad?",
-        "answer": "Sí, el festival cuenta con accesos y áreas designadas para personas con discapacidad para garantizar una experiencia cómoda."
+        "question": "¿Qué facilidades de accesibilidad se anunciaron?",
+        "answer": "La edición 2026 anunció accesos y áreas designadas para personas con discapacidad."
       },
       {
-        "question": "¿Podré adquirir mercancía oficial durante el evento?",
-        "answer": "¡Claro! Tendremos un stand con el merchandising oficial de Dängo y de las bandas participantes para que no te quedes sin tu recuerdo."
+        "question": "¿Se anunció venta de mercancía oficial?",
+        "answer": "Se anunció un espacio de mercancía oficial de Dängo y de las bandas participantes."
       },
       {
-        "question": "¿Habrá opciones de comida y bebida?",
-        "answer": "Sí, contaremos con una amplia variedad gastronómica y de snacks."
+        "question": "¿Qué se anunció sobre comida y bebida?",
+        "answer": "La edición 2026 anunció opciones de comida, bebidas y snacks dentro del recinto."
       },
       {
-        "question": "¿Habrá venta de bebidas con alcohol?",
-        "answer": "Sí habrá venta de alcohol, pero únicamente para mayores de 18 años."
+        "question": "¿Cuál era la restricción para la venta de alcohol?",
+        "answer": "La información de la edición 2026 limitaba la venta de bebidas alcohólicas a mayores de 18 años."
       },
       {
-        "question": "¿Habrá atención médica en el festival?",
-        "answer": "Sí, contaremos con personal de servicio médico capacitado y ambulancia disponible durante todo el evento para cualquier emergencia."
+        "question": "¿Qué servicios de atención médica se anunciaron?",
+        "answer": "La edición 2026 anunció personal de servicio médico y una ambulancia disponible durante el evento."
       },
       {
-        "question": "¿Cuáles son los protocolos de revisión a mi llegada?",
-        "answer": "Para seguridad de todos, se realizará una revisión obligatoria de pertenencias en la entrada. No se permite el ingreso de objetos punzocortantes, sustancias ilícitas o artículos prohibidos."
+        "question": "¿Qué revisión de acceso se anunció?",
+        "answer": "Para la edición 2026 se anunció una revisión obligatoria de pertenencias en la entrada. No se permitía ingresar objetos punzocortantes, sustancias ilícitas ni artículos prohibidos."
       }
     ]
   }

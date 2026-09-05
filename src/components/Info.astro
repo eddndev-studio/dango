@@ -1,89 +1,48 @@
 ---
-import faqData from "../data/faq.json";
-
-// Import Icons if needed, or use inline SVG
+import faq from '../data/faq.json';
+import { site } from '../data/site';
+const ids = ['ubicacion', 'boletos', 'horarios', 'servicios'];
 ---
 
-<section id="informacion" class="py-24 bg-black relative overflow-hidden">
-    <div class="container mx-auto px-4 relative z-10">
-        <!-- Title -->
-        <div class="mb-16 text-center">
-            <h2 class="section-title text-dango-pink">
-                INFORMACIÓN
-            </h2>
-            <div class="h-1 w-24 bg-white/20 mx-auto mt-4 rounded-full"></div>
-        </div>
-
-        <div class="max-w-4xl mx-auto space-y-12">
-            {
-                faqData.map((category) => (
-                    <div class="category-group">
-                        <h3 class="font-kismis text-2xl md:text-3xl text-white mb-6 tracking-wide border-b border-white/10 pb-2">
-                            {category.category}
-                        </h3>
-                        <div class="space-y-4">
-                            {category.items.map((item) => (
-                                <details class="group bg-white/5 rounded-lg border border-white/5 open:bg-white/10 transition-colors duration-300">
-                                    <summary class="flex justify-between items-center cursor-pointer p-4 md:p-6 list-none [&::-webkit-details-marker]:hidden focus:outline-none focus:ring-1 focus:ring-dango-pink/50 rounded-lg">
-                                        <span class="text-base md:text-lg font-outfit font-bold text-white group-hover:text-dango-pink transition-colors pr-4">
-                                            {item.question}
-                                        </span>
-                                        <span class="transform group-open:rotate-45 transition-transform duration-300 text-dango-pink">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke-width="2.5"
-                                                stroke="currentColor"
-                                                class="w-5 h-5 md:w-6 md:h-6"
-                                            >
-                                                <path
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                    d="M12 4.5v15m7.5-7.5h-15"
-                                                />
-                                            </svg>
-                                        </span>
-                                    </summary>
-                                    <div class="overflow-hidden">
-                                        <div class="p-4 md:p-6 pt-0 text-gray-300 font-inter leading-relaxed text-sm md:text-base border-t border-white/5 mt-2">
-                                            <span set:html={item.answer} />
-                                        </div>
-                                    </div>
-                                </details>
-                            ))}
-                        </div>
-                    </div>
-                ))
-            }
-        </div>
+<section class="info-page section-pad">
+  <div class="shell">
+    <p class="eyebrow">Dängo / Información</p><h1>
+      Todo lo que<br /><span class="pink">necesitas saber.</span>
+    </h1><p class="body-copy">
+      Información publicada para la edición del <time datetime={site.date}
+        >14 de febrero de 2026</time
+      >. Esta edición ya concluyó; las condiciones de próximos eventos se
+      anunciarán en los canales oficiales.
+    </p>
+    <div class="info-layout">
+      <nav class="faq-nav" aria-label="Categorías de información">
+        {
+          faq.map((category, i) => (
+            <a href={`#${ids[i]}`}>{category.category}</a>
+          ))
+        }<a href={`mailto:${site.email}`}>¿Otra duda? Escríbenos ↗</a>
+      </nav><div class="faq-content">
+        {
+          faq.map((category, i) => (
+            <section
+              id={ids[i]}
+              class="faq-group"
+              aria-labelledby={`heading-${ids[i]}`}
+            >
+              <h2 id={`heading-${ids[i]}`}>{category.category}</h2>
+              {category.items.map((item) => (
+                <details class="faq-item">
+                  <summary>
+                    {item.question}
+                    <span aria-hidden="true">＋</span>
+                  </summary>
+                  <div class="faq-answer" set:html={item.answer} />
+                </details>
+              ))}
+            </section>
+          ))
+        }
+      </div>
     </div>
-    
-    <!-- Background Elements -->
-    <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-dango-pink/10 rounded-full blur-[100px] pointer-events-none"></div>
-    <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-96 h-96 bg-brand-purple/10 rounded-full blur-[100px] pointer-events-none"></div>
+  </div>
 </section>
-
-<style>
-    .section-title {
-        font-family: var(--font-kismis);
-        font-size: clamp(3rem, 6vw, 5rem);
-        line-height: 1;
-        letter-spacing: 0.05em;
-    }
-    
-    /* Animation for details expanding */
-    details > div {
-        display: grid;
-        grid-template-rows: 0fr;
-        transition: grid-template-rows 0.3s ease-out;
-    }
-    
-    details[open] > div {
-        grid-template-rows: 1fr;
-    }
-    
-    details > div > div {
-        min-height: 0;
-    }
-</style>

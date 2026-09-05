@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dangofestival.com/sitemap-index.xml
+Sitemap: https://festivaldango.com/sitemap-index.xml

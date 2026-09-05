@@ -1,163 +1,53 @@
-<div align="center">
+# Festival Dängo
 
-![Dango Festival Banner](./assets/cover.jpg)
+Sitio oficial de [Festival Dängo](https://festivaldango.com), diseñado y desarrollado por [The Dash Studios](https://thedashstudios.mx). Música, arte y cultura en Rancho La Ventilla, Teotihuacán.
 
+La versión actual conserva la **edición del 14 de febrero de 2026 como archivo**: cartel, 27 fotografías, ubicación y condiciones históricas. La fecha se verificó en el cartel oficial del repositorio (`public/images/ui/noticias/Line_Up.webp`). No anuncia entradas disponibles ni inventa una próxima edición.
 
-# 🎵 Dango Festival - Teotihuacán
+## Desarrollo
 
-**Festival Dängo Teotihuacán Ba'ni Quetzalcóatl**
+Requiere Node.js 22.12 o posterior y npm.
 
-*Donde la música encuentra a las pirámides*
-
-[![Astro](https://img.shields.io/badge/Astro-5.16.6-FF5D01?style=for-the-badge&logo=astro&logoColor=white)](https://astro.build)
-[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.1.18-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
-[![GSAP](https://img.shields.io/badge/GSAP-3.14.2-88CE02?style=for-the-badge&logo=greensock&logoColor=white)](https://greensock.com/gsap/)
-[![Lenis](https://img.shields.io/badge/Lenis-1.3.16-000000?style=for-the-badge)](https://lenis.studiofreight.com/)
-
-[![Deploy Status](https://img.shields.io/badge/Deploy-Coming_Soon-yellow?style=for-the-badge)]()
-[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
-
-</div>
-
----
-
-## 🌟 Acerca del Festival
-
-**Dango Festival** es una experiencia cultural y musical única que fusiona la energía de la música moderna con la majestuosidad de Teotihuacán. Celebrado en el **Rancho La Ventilla**, a minutos de las emblemáticas pirámides, este festival ofrece:
-
-- 🎸 **Música en vivo**: Rock alternativo, indie y ritmos electrónicos
-- 🏛️ **Ceremonias prehispánicas** y Danza del Fuego
-- 🎈 **Experiencias únicas**: Vuelos en globo aerostático, recorridos en cuatrimoto, papalotes
-- 🏕️ **Camping** bajo las estrellas con vista a las pirámides
-- 🍹 **Gastronomía mexicana** auténtica: mezcal, pulque y más
-
-**Fecha:** 15 y 16 de Febrero, 2025  
-**Lugar:** Rancho La Ventilla, Teotihuacán, Estado de México
-
----
-
-## 🚀 Stack Tecnológico
-
-Este sitio web está construido con tecnologías de vanguardia para ofrecer una experiencia inmersiva y fluida:
-
-| Tecnología | Descripción |
-|-----------|-------------|
-| **Astro 5** | Framework moderno para sitios estáticos ultra-rápidos |
-| **TailwindCSS 4** | Sistema de diseño CSS-first con configuración `@theme` |
-| **GSAP** | Animaciones de alto rendimiento |
-| **Lenis** | Smooth scrolling suave y natural |
-| **Vite** | Build tool de última generación |
-
-### 🎨 Diseño Konpo
-
-El sitio implementa el sistema de diseño **Konpo**, caracterizado por:
-
-- 🌑 **Dark mode** nativo
-- 💜 **Acentos púrpura** (#8b5cf6) que evocan la energía del festival
-- 🌐 **Grid pattern** que remite a las estructuras geométricas de Teotihuacán
-- ✨ **Micro-animaciones** fluidas
-- 🔤 **Tipografía moderna**: Inter + Outfit
-
----
-
-## 📦 Instalación
-
-```bash
-# Clonar el repositorio
-git clone https://github.com/sylestudio/dango-festival.git
-
-# Navegar al directorio
-cd dango-festival
-
-# Instalar dependencias
-npm install
-
-# Iniciar servidor de desarrollo
+```sh
+git clone https://github.com/eddndev-studio/dango.git
+cd dango
+npm ci
 npm run dev
 ```
 
-El sitio estará disponible en: **http://localhost:4321/**
+Astro genera HTML estático. El sitio usa CSS propio, tipografías locales WOFF2 y JavaScript pequeño para el menú y las galerías. Las interacciones principales conservan alternativas sin JavaScript.
 
----
-
-## 🛠️ Comandos
-
-| Comando | Acción |
-|---------|--------|
-| `npm run dev` | Iniciar servidor de desarrollo en `localhost:4321` |
-| `npm run build` | Construir sitio de producción en `./dist/` |
-| `npm run preview` | Previsualizar build de producción localmente |
-
----
-
-## 📂 Estructura del Proyecto
-
-```
-dango-festival/
-├── assets/              # Imágenes para decoración del repositorio
-├── public/              # Assets estáticos (favicon, robots.txt)
-├── src/
-│   ├── assets/          # Imágenes optimizadas (WebP/AVIF)
-│   ├── components/      # Componentes UI reutilizables
-│   ├── layouts/         # Layouts de páginas
-│   ├── pages/           # Páginas del sitio (routing)
-│   ├── styles/          # Estilos globales y configuración TailwindCSS
-│   └── utils/           # Utilidades (Lenis, GSAP helpers)
-├── astro.config.mjs     # Configuración de Astro
-└── package.json
+```sh
+npm run build   # Genera las imágenes adaptativas y el sitio en dist/
+npm run check   # Revisa los tipos y componentes
+npm run verify  # Verifica enlaces, recursos, SEO y presupuestos de tamaño
+npm run preview
 ```
 
----
+## Contenido y fotografías
 
-## 🎯 Roadmap
+- `src/data/site.ts`: identidad, fecha, enlaces y cartel.
+- `src/data/faq.json`: información histórica de la edición.
+- `src/data/gallery-captions.json`: descripciones de las 27 fotografías.
+- `public/images/`: originales; no se sobrescriben durante el build.
+- `scripts/build-media.mjs`: genera WebP a 480, 960 y 1600 px, con nombres basados en el contenido; corrige la orientación de una fotografía guardada de lado.
+- `public/media/` y `src/data/media.json`: resultados generados, excluidos de Git.
+- `scripts/build-social.mjs`: genera la tarjeta social de 1200 × 630 a partir del logotipo vectorial original. Ejecutar después de modificar esa composición.
 
-- [x] Setup inicial del proyecto
-- [x] Configuración de TailwindCSS 4
-- [x] Integración de Lenis & GSAP
-- [x] Hero section con estética Konpo
-- [ ] Sección de Line-up (artistas)
-- [ ] Galería de ediciones anteriores
-- [ ] Sistema de venta de boletos
-- [ ] Mapa interactivo del venue
-- [ ] Integración con redes sociales
-- [ ] CI/CD Pipeline (GitHub Actions)
-- [ ] Deploy automático
+Las miniaturas usan `srcset`, dimensiones explícitas y carga diferida. La galería abre una versión de mayor tamaño solo cuando se solicita. El menú y los visores usan diálogos nativos, foco controlado y cierre con Escape; los visores también admiten flechas. La preferencia de movimiento reducido desactiva transiciones.
 
----
+## SEO
 
-## 🌐 Deploy
+Canonical y sitemap usan exclusivamente `https://festivaldango.com`. Cada página tiene título, descripción, H1 y metadatos sociales. Los datos estructurados del evento aparecen únicamente en la portada y corresponden a la fecha del cartel. No se publica disponibilidad de boletos de una edición pasada. La página 404 incluye `noindex`.
 
-*Próximamente: Configuración de deployment automático*
+## Publicación
 
-El sitio será desplegado en:
-- [ ] Vercel / Netlify / Cloudflare Pages
-- [ ] Pipeline de CI/CD con GitHub Actions
-- [ ] Optimización de assets para CDN
+GitHub Actions ejecuta instalación reproducible, build, revisión de tipos y verificación del sitio. Un push a `main` publica al hosting existente mediante SSH/rsync; los pull requests ejecutan las comprobaciones sin desplegar.
 
----
+Se conservan los secretos de repositorio existentes: `SSH_PRIVATE_KEY`, `SSH_HOST`, `SSH_USER` y `DEPLOY_PATH`. Nunca deben guardarse en archivos del proyecto.
 
-## 👨‍💻 Desarrollado por
+El servidor actual es nginx. Su configuración de caché, HTTP/2 y respuesta 404 se gestiona en el hosting, no mediante archivos `.htaccess`. No es necesario cambiar de proveedor para publicar este proyecto.
 
-<div align="center">
+## Licencia
 
-[![Syle Studio](./assets/logo.jpg)](https://sylestudio.com)
-
-**[Syle Studio](https://sylestudio.com)**
-
-*Digital Agency especializada en experiencias web inmersivas*
-
-</div>
-
-Syle Studio es un estudio de diseño y desarrollo digital dedicado a crear experiencias web únicas que combinan estética moderna con tecnología de vanguardia.
-
----
-
-<div align="center">
-
-**Hecho con 💜 para la comunidad de Dango Festival**
-
-*Conectando tradición ancestral con cultura contemporánea*
-
-[Instagram](https://instagram.com/dangofestival) • [Facebook](https://facebook.com/dangofestival) • [Sitio Oficial](https://dangofestival.com)
-
-</div>
+El código mantiene la licencia GPL-3.0-or-later del repositorio; véase [LICENSE](LICENSE). Las fotografías y la identidad del festival se mantienen como materiales del proyecto.

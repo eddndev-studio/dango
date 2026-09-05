@@ -1,0 +1,33 @@
+---
+import media from '../data/media.json';
+interface Props {
+  src: string;
+  alt: string;
+  sizes?: string;
+  class?: string;
+  priority?: boolean;
+}
+const {
+  src,
+  alt,
+  sizes = '(min-width: 900px) 50vw, 100vw',
+  class: className,
+  priority = false,
+} = Astro.props;
+const image = media[src as keyof typeof media];
+if (!image)
+  throw new Error(`Missing responsive image: ${src}. Run npm run media.`);
+---
+
+<img
+  src={image.src}
+  srcset={image.srcset}
+  sizes={sizes}
+  width={image.width}
+  height={image.height}
+  alt={alt}
+  class={className}
+  loading={priority ? 'eager' : 'lazy'}
+  fetchpriority={priority ? 'high' : 'auto'}
+  decoding="async"
+/>

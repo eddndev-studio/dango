@@ -1,52 +1,32 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Navbar from "../components/Navbar.astro";
-import VideoBackground from "../components/VideoBackground.astro";
-import DualLogos from "../components/DualLogos.astro";
-import LineUp from "../components/LineUp.astro";
-import Tickets from "../components/Tickets.astro";
-import Gallery from "../components/Gallery.astro";
-import News from "../components/News.astro";
-import Location from "../components/Location.astro";
-import IconSlider from "../components/IconSlider.astro";
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Tickets from '../components/Tickets.astro';
+import LineUp from '../components/LineUp.astro';
+import Gallery from '../components/Gallery.astro';
+import Location from '../components/Location.astro';
+import News from '../components/News.astro';
+import IconSlider from '../components/IconSlider.astro';
 ---
 
-<Layout title="Dängo Festival 2026 | Teotihuacán">
-	<Navbar />
-
-	<!-- 1_P Mainscreen -->
-	<VideoBackground videoSrc={null}>
-		<DualLogos />
-	</VideoBackground>
-
-	<!-- Placeholder Sections -->
-	<Tickets />
-
-	<!-- 2_L Line Up -->
-	<LineUp />
-
-    <!-- 3_U Ubicación -->
-    <Location />
-
-    <!-- 3.5_S Slider Separator -->
-    <div class="py-4 bg-black overflow-hidden relative z-20">
-        <IconSlider direction="right" />
-    </div>
-
-	<News />
-
-    <!-- 
-	<section
-		id="playlist"
-		class="min-h-screen bg-black flex items-center justify-center"
-	>
-		<div class="container mx-auto px-4 py-20 text-center">
-			<h2 class="text-6xl font-bold text-white mb-4">Playlist</h2>
-			<p class="text-xl text-gray-400">Próximamente</p>
-		</div>
-	</section>
-    -->
-
-	<Gallery folder="Dango" title="DANGO" id="galeria-dango" />
-    <Gallery folder="Ritual_Dango" title="RITUAL DANGO" id="galeria-ritual" />
+<Layout title="Festival Dängo 2026 | Música y cultura en Teotihuacán">
+  <Hero />
+  <IconSlider />
+  <Tickets />
+  <LineUp />
+  <Gallery
+    folder="Dango"
+    title="Así se siente Dängo"
+    id="galeria-dango"
+    subtitle="Luces, encuentros y momentos que se quedan. Explora nuestro archivo fotográfico."
+  />
+  <Gallery
+    folder="Ritual_Dango"
+    title="Ritual Dängo"
+    id="galeria-ritual"
+    subtitle="Otra mirada a la comunidad y la energía que dan vida al festival."
+  />
+  <Location />
+  <IconSlider />
+  <News />
 </Layout>

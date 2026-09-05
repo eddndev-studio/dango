@@ -1,20 +1,10 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Navbar from "../components/Navbar.astro";
-import InfoComponent from "../components/Info.astro";
-import Footer from "../components/Footer.astro";
+import Layout from '../layouts/Layout.astro';
+import Info from '../components/Info.astro';
 ---
 
-<Layout title="Información | Dängo Festival 2026">
-    <Navbar />
-    
-    <main class="pt-[80px]"> <!-- Add padding-top to account for fixed navbar -->
-        <InfoComponent />
-    </main>
-
-    <!-- Footer is already in Layout but often Layouts are structured differently. 
-         Let's check Layout.astro again. 
-         The user previously added Footer to Layout.astro. 
-         So I don't need to add it here explicitly if it's already in Layout.
-    -->
-</Layout>
+<Layout
+  title="Información y preguntas frecuentes | Festival Dängo"
+  description="Consulta la información de la edición 2026 de Festival Dängo: ubicación, boletos, acceso, horarios y contacto oficial en Teotihuacán."
+  ><Info /></Layout
+>

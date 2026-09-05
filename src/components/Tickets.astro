@@ -1,150 +1,25 @@
 ---
-import DangoLogo from "./DangoLogo.astro";
-
-const ticketOptions = [
-    {
-        id: "arema",
-        image: "/images/ui/boletos/arema.webp",
-        label: "AREMA",
-        href: "https://arema.mx/e/16435/Festival-Dango-2026",
-    },
-    {
-        id: "puntos",
-        image: "/images/ui/boletos/puntos_venta.webp",
-        label: "PUNTOS DE VENTA",
-        href: "#", // O el link correspondiente si existe
-    },
-];
+import { site } from '../data/site';
 ---
 
-<section id="boletos" class="tickets-section">
-    <!-- Background Decorativo (Lineas Topográficas abstractas) -->
-    <div class="absolute inset-0 opacity-50 pointer-events-none">
-        <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path d="M0 100 C 20 0 50 0 100 100 Z" fill="none" stroke="url(#gradient-tickets)" stroke-width="0.5" vector-effect="non-scaling-stroke"/>
-            <path d="M0 100 C 30 20 70 20 100 100 Z" fill="none" stroke="url(#gradient-tickets)" stroke-width="0.5" vector-effect="non-scaling-stroke"/>
-            <path d="M0 100 C 40 40 60 40 100 100 Z" fill="none" stroke="url(#gradient-tickets)" stroke-width="0.5" vector-effect="non-scaling-stroke"/>
-            <defs>
-                <linearGradient id="gradient-tickets" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#8b5cf6" />
-                    <stop offset="100%" stop-color="#FF1493" />
-                </linearGradient>
-            </defs>
-        </svg>
+<section id="boletos" class="edition-info" aria-label="Edición 2026 y boletos">
+  <div class="shell edition-info-inner">
+    <div>
+      <span class="eyebrow">Edición 2026 · Archivo</span><p>
+        El encuentro pasa.<br /><strong>La energía se queda.</strong>
+      </p>
+    </div><div class="edition-details">
+      <p>
+        <time datetime={site.date}>{site.dateLabel}</time><br />Rancho La
+        Ventilla · Teotihuacán
+      </p><p class="muted">
+        Esta edición ya concluyó. Sigue nuestros canales oficiales para conocer
+        los próximos anuncios.
+      </p><div class="edition-links">
+        <a href={site.instagram} target="_blank" rel="noopener noreferrer"
+          >Novedades en Instagram ↗</a
+        ><a href="/informacion/#boletos">Información de boletos ↗</a>
+      </div>
     </div>
-
-    <div
-        class="container mx-auto px-4 h-full flex flex-col relative z-10 pt-20 pb-20 md:pb-0"
-    >
-        <!-- Title: Top Left -->
-        <div class="w-full text-left mb-12">
-            <h2 class="section-title">
-                ADQUIERE TUS <br />
-                <span class="text-white">BOLETOS</span>
-            </h2>
-        </div>
-
-        <!-- Images: Centered horizontally below title -->
-        <div
-            class="w-full flex flex-col md:flex-row justify-center items-center gap-6 flex-grow"
-        >
-            {
-                ticketOptions.map((ticket) => (
-                    <a
-                        href={ticket.href}
-                        target={ticket.href.startsWith("http") ? "_blank" : "_self"}
-                        rel={ticket.href.startsWith("http") ? "noopener noreferrer" : ""}
-                        class="ticket-card group relative block overflow-hidden w-full max-w-[350px] aspect-[3/4]"
-                    >
-                        {/* Image */}
-                        <img
-                            src={ticket.image}
-                            alt={ticket.label}
-                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                            loading="lazy"
-                        />
-
-                        {/* Dark Overlay (removes on hover) */}
-                        <div class="absolute inset-0 bg-black/40 transition-opacity duration-300 group-hover:opacity-0" />
-
-                        {/* Logo Top Left */}
-                        <div class="absolute top-6 left-6 w-16 text-white z-10 opacity-90">
-                            <DangoLogo />
-                        </div>
-
-                        {/* Text Bottom Left */}
-                        <div class="absolute bottom-6 left-6 z-10">
-                            <span class="text-white font-bold text-3xl font-outfit tracking-widest drop-shadow-lg">
-                                {ticket.label}
-                            </span>
-                        </div>
-                    </a>
-                ))
-            }
-        </div>
-    </div>
+  </div>
 </section>
-<script>
-    import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    document.addEventListener("astro:page-load", () => {
-        const section = document.querySelector(".tickets-section");
-        const title = section?.querySelector(".section-title");
-        const cards = section?.querySelectorAll(".ticket-card");
-
-        if (!section || !title || !cards) return;
-
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: section,
-                start: "top 80%",
-                toggleActions: "play none none reverse",
-            },
-        });
-
-        // Animate Title
-        tl.from(title, {
-            y: 50,
-            opacity: 0,
-            duration: 1,
-            ease: "power3.out",
-        });
-
-        // Animate Cards (Staggered)
-        tl.from(
-            cards,
-            {
-                y: 100,
-                opacity: 0,
-                duration: 1,
-                stagger: 0.2,
-                ease: "power3.out",
-            },
-            "-=0.5",
-        );
-    });
-</script>
-<style>
-    .tickets-section {
-        min-height: 100vh;
-        background-color: #000;
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .section-title {
-        font-family: var(--font-kismis);
-        font-size: clamp(3rem, 8vw, 6rem);
-        line-height: 0.9;
-        color: var(--color-dango-cream);
-    }
-
-    .section-title span {
-        color: #fff;
-    }
-</style>

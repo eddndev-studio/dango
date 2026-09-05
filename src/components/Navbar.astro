@@ -1,323 +1,94 @@
 ---
-const navItems = [
-    { id: "1_B", label: "BOLETOS", href: "/#boletos" },
-    { id: "2_L", label: "LINE UP", href: "/#lineup" },
-    { id: "3_U", label: "UBICACIÓN", href: "/#ubicacion" },
-    { id: "4_I", label: "INFORMACIÓN", href: "/informacion" },
-    { id: "5_P", label: "PLAYLIST", href: "/#playlist" },
-    { id: "6_G", label: "GALERÍA", href: "/#galeria-dango" },
-];
-
-import DangoLogo from "./DangoLogo.astro";
+import DangoLogo from './DangoLogo.astro';
+import { navigation, site } from '../data/site';
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm">
-    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-        <!-- Left Navigation (Desktop) -->
-        <div class="hidden md:flex gap-8">
-            {
-                navItems.slice(0, 3).map((item) => (
-                    <a
-                        href={item.href}
-                        class="nav-link text-white font-medium tracking-wide hover-color-random"
-                        data-nav-id={item.id}
-                    >
-                        {item.label}
-                    </a>
-                ))
-            }
-        </div>
-
-        <!-- Logo Center -->
-        <a href="/" class="logo-link hover-color-random text-dango-pink">
-            <DangoLogo class="h-10 w-auto" />
+<header class="site-header">
+  <div class="shell header-inner">
+    <a href="/" class="brand" aria-label="Festival Dängo, inicio"
+      ><DangoLogo /></a
+    >
+    <nav class="desktop-nav" aria-label="Navegación principal">
+      {
+        navigation.map((item) => (
+          <a
+            href={item.href}
+            aria-current={Astro.url.pathname === item.href ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+    <a
+      class="header-cta"
+      href={site.instagram}
+      target="_blank"
+      rel="noopener noreferrer"
+      >Sigue el ritual <span aria-hidden="true">↗</span></a
+    >
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label="Abrir menú"
+      aria-controls="mobile-menu"
+      aria-expanded="false"
+      hidden><span>Menú</span><span aria-hidden="true">☰</span></button
+    >
+  </div>
+  <noscript
+    ><nav class="noscript-nav" aria-label="Navegación móvil">
+      {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav></noscript
+  >
+</header>
+<dialog id="mobile-menu" class="menu-dialog" aria-label="Menú principal">
+  <div class="menu-top">
+    <span class="eyebrow">Dängo · Teotihuacán</span><button
+      type="button"
+      class="icon-button"
+      aria-label="Cerrar menú"
+      data-close-menu>×</button>
+  </div>
+  <nav aria-label="Navegación móvil">
+    {
+      navigation.map((item, i) => (
+        <a href={item.href}>
+          <span class="menu-number">0{i + 1}</span>
+          {item.label}
+          <span aria-hidden="true">↗</span>
         </a>
-
-        <!-- Right Navigation (Desktop) -->
-        <div class="hidden md:flex gap-8">
-            {
-                navItems.slice(3).map((item) => (
-                    <a
-                        href={item.href}
-                        class="nav-link text-white font-medium tracking-wide hover-color-random"
-                        data-nav-id={item.id}
-                    >
-                        {item.label}
-                    </a>
-                ))
-            }
-        </div>
-
-        <!-- Hamburger Button (Mobile) -->
-        <button
-            id="hamburger-btn"
-            class="md:hidden relative w-8 h-8 flex flex-col justify-center items-center gap-1.5 z-60"
-            aria-label="Abrir menú"
-            aria-expanded="false"
-        >
-            <span
-                class="hamburger-line w-6 h-0.5 bg-white rounded-full transition-all duration-300 origin-center"
-            ></span>
-            <span
-                class="hamburger-line w-6 h-0.5 bg-white rounded-full transition-all duration-300 origin-center"
-            ></span>
-            <span
-                class="hamburger-line w-6 h-0.5 bg-white rounded-full transition-all duration-300 origin-center"
-            ></span>
-        </button>
-    </div>
-</nav>
-
-<!-- Mobile Menu Overlay -->
-<div
-    id="mobile-menu"
-    class="fixed inset-0 z-40 bg-black/95 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 md:hidden"
->
-    <div
-        class="mobile-menu-inner h-full flex flex-col items-center justify-center gap-6 px-8"
-    >
-        <!-- Close Button -->
-        <button
-            id="close-menu-btn"
-            class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center text-white text-3xl hover:text-dango-pink transition-colors"
-            aria-label="Cerrar menú"
-        >
-            ✕
-        </button>
-
-        <!-- Mobile Nav Links -->
-        {
-            navItems.map((item, index) => (
-                <a
-                    href={item.href}
-                    class="mobile-nav-link text-4xl text-white font-bold tracking-wider opacity-0 translate-y-8 hover-color-random"
-                    data-nav-id={item.id}
-                    style={`--delay: ${index * 0.1}s`}
-                >
-                    {item.label}
-                </a>
-            ))
-        }
-
-        <!-- Logo Footer -->
-        <div class="mobile-logo mt-8 opacity-0 text-center flex flex-col items-center">
-            <div class="text-dango-pink mb-2">
-                <DangoLogo class="h-16 w-auto" />
-            </div>
-            <p class="text-sm text-gray-500 mt-2">
-                Festival 2026 • Teotihuacán
-            </p>
-        </div>
-    </div>
-
-    <!-- Decorative Grid Background -->
-    <div
-        class="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"
-    >
-    </div>
-</div>
-
+      ))
+    }
+  </nav>
+  <p class="menu-bottom">Música. Raíces. Comunidad.</p>
+</dialog>
 <script>
-    import { gsap } from "gsap";
-    import {
-        applyRandomColorHover,
-        getRandomDangoColor,
-    } from "../utils/colorUtils";
-
-    document.addEventListener("astro:page-load", () => {
-        const hamburgerBtn = document.getElementById("hamburger-btn");
-        const closeMenuBtn = document.getElementById("close-menu-btn");
-        const mobileMenu = document.getElementById("mobile-menu");
-        const hamburgerLines = document.querySelectorAll(".hamburger-line");
-        const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
-        const mobileLogo = document.querySelector(".mobile-logo");
-        const hoverElements = document.querySelectorAll(".hover-color-random");
-
-        let isMenuOpen = false;
-
-        // Apply hover effects to all elements
-        hoverElements.forEach((el) => {
-            applyRandomColorHover(el as HTMLElement);
-        });
-
-        // Touch/click color effect for mobile links
-        mobileNavLinks.forEach((link) => {
-            link.addEventListener("touchstart", () => {
-                (link as HTMLElement).style.color = getRandomDangoColor();
-            });
-        });
-
-        function openMenu() {
-            if (!mobileMenu || isMenuOpen) return;
-            isMenuOpen = true;
-
-            // Prevent body scroll
-            document.body.style.overflow = "hidden";
-
-            // Show overlay
-            mobileMenu.classList.remove("opacity-0", "pointer-events-none");
-            mobileMenu.classList.add("opacity-100", "pointer-events-auto");
-
-            // Animate hamburger to X
-            gsap.to(hamburgerLines[0], {
-                rotation: 45,
-                y: 6,
-                duration: 0.3,
-                ease: "power2.out",
-            });
-            gsap.to(hamburgerLines[1], {
-                opacity: 0,
-                duration: 0.2,
-            });
-            gsap.to(hamburgerLines[2], {
-                rotation: -45,
-                y: -6,
-                duration: 0.3,
-                ease: "power2.out",
-            });
-
-            // Animate links staggered
-            gsap.to(mobileNavLinks, {
-                opacity: 1,
-                y: 0,
-                duration: 0.5,
-                stagger: 0.08,
-                ease: "power3.out",
-                delay: 0.1,
-            });
-
-            // Animate logo
-            gsap.to(mobileLogo, {
-                opacity: 1,
-                duration: 0.5,
-                delay: 0.5,
-            });
-
-            hamburgerBtn?.setAttribute("aria-expanded", "true");
-        }
-
-        function closeMenu() {
-            if (!mobileMenu || !isMenuOpen) return;
-            isMenuOpen = false;
-
-            // Restore body scroll
-            document.body.style.overflow = "";
-
-            // Reset hamburger
-            gsap.to(hamburgerLines[0], {
-                rotation: 0,
-                y: 0,
-                duration: 0.3,
-                ease: "power2.out",
-            });
-            gsap.to(hamburgerLines[1], {
-                opacity: 1,
-                duration: 0.2,
-            });
-            gsap.to(hamburgerLines[2], {
-                rotation: 0,
-                y: 0,
-                duration: 0.3,
-                ease: "power2.out",
-            });
-
-            // Hide overlay
-            mobileMenu.classList.add("opacity-0", "pointer-events-none");
-            mobileMenu.classList.remove("opacity-100", "pointer-events-auto");
-
-            // Reset links for next open
-            gsap.set(mobileNavLinks, { opacity: 0, y: 32 });
-            gsap.set(mobileLogo, { opacity: 0 });
-
-            hamburgerBtn?.setAttribute("aria-expanded", "false");
-        }
-
-        // Event Listeners
-        hamburgerBtn?.addEventListener("click", () => {
-            if (isMenuOpen) {
-                closeMenu();
-            } else {
-                openMenu();
-            }
-        });
-
-        closeMenuBtn?.addEventListener("click", closeMenu);
-
-        // Close menu when clicking a link
-        mobileNavLinks.forEach((link) => {
-            link.addEventListener("click", () => {
-                closeMenu();
-            });
-        });
-
-        // Close on escape key
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape" && isMenuOpen) {
-                closeMenu();
-            }
-        });
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const menu = document.querySelector<HTMLDialogElement>('#mobile-menu');
+  if (toggle && menu) {
+    toggle.hidden = false;
+    toggle.addEventListener('click', () => {
+      menu.showModal();
+      document.documentElement.classList.add('modal-open');
+      toggle.setAttribute('aria-expanded', 'true');
     });
+    menu
+      .querySelector('[data-close-menu]')
+      ?.addEventListener('click', () => menu.close());
+    menu
+      .querySelectorAll('a')
+      .forEach((link) => link.addEventListener('click', () => menu.close()));
+    menu.addEventListener('click', (event) => {
+      if (event.target === menu) menu.close();
+    });
+    menu.addEventListener('close', () => {
+      document.documentElement.classList.remove('modal-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.focus();
+    });
+    matchMedia('(min-width: 960px)').addEventListener('change', (event) => {
+      if (event.matches && menu.open) menu.close();
+    });
+  }
 </script>
-
-<style>
-    .nav-link {
-        position: relative;
-        transition: color 0.3s ease;
-        font-size: 0.875rem;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        font-family: var(--font-outfit);
-    }
-
-    .nav-link::after {
-        content: "";
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        width: 0%;
-        height: 2px;
-        background: currentColor;
-        transition: width 0.3s ease;
-    }
-
-    .nav-link:hover::after {
-        width: 100%;
-    }
-
-    .logo-link {
-        transition: transform 0.3s ease;
-        font-family: var(--font-kismis);
-    }
-
-    .logo-link:hover {
-        transform: scale(1.1);
-    }
-
-    .text-dango-pink {
-        color: #ff1493;
-    }
-
-    /* Mobile Menu Styles */
-    .mobile-nav-link {
-        font-family: var(--font-kismis);
-        text-transform: uppercase;
-        letter-spacing: 0.15em;
-        transition:
-            color 0.3s ease,
-            transform 0.3s ease;
-        will-change: transform, opacity;
-    }
-
-    .mobile-nav-link:hover {
-        transform: scale(1.05);
-    }
-
-    .mobile-logo {
-        font-family: var(--font-kismis);
-    }
-
-    /* Hamburger z-index above overlay */
-    .z-60 {
-        z-index: 60;
-    }
-</style>

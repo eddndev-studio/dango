@@ -24,3 +24,8 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Generated responsive media (npm run media)
+/public/media/
+/src/data/media.json
+/reports/

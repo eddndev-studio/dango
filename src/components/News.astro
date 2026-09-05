@@ -1,127 +1,66 @@
 ---
-const newsItems = [
-    {
-        image: "/images/ui/noticias/Line_Up.webp",
-        link: "https://www.instagram.com/p/DRctIzliHba/",
-        alt: "Line Up"
-    },
-    {
-        image: "/images/ui/noticias/Fan.webp",
-        link: "https://www.instagram.com/p/DP-Kz95DJUS/?img_index=1",
-        alt: "Fan"
-    },
-    {
-        image: "/images/ui/noticias/Artista.webp",
-        link: "https://www.instagram.com/p/DSbBXTNjaZT/",
-        alt: "Artista"
-    },
-    {
-        image: "/images/ui/noticias/Dango.webp",
-        link: "https://www.instagram.com/p/DR8JnKtDOi6/",
-        alt: "Dango"
-    },
-    {
-        image: "/images/ui/noticias/Boletoos.webp",
-        link: "https://www.instagram.com/p/DRx1cCnDA77/?img_index=2",
-        alt: "Boletos"
-    },
-    {
-        image: "/images/ui/noticias/Amor.webp",
-        link: "https://www.instagram.com/p/DRQ202qDPRA/",
-        alt: "Amor"
-    }
+import { site } from '../data/site';
+import ResponsiveImage from './ResponsiveImage.astro';
+const posts = [
+  {
+    image: 'Line_Up.webp',
+    href: 'https://www.instagram.com/p/DRctIzliHba/',
+    label: 'El cartel de Dängo 2026',
+  },
+  {
+    image: 'Artista.webp',
+    href: 'https://www.instagram.com/p/DSbBXTNjaZT/',
+    label: 'Los artistas del festival',
+  },
+  {
+    image: 'Dango.webp',
+    href: 'https://www.instagram.com/p/DR8JnKtDOi6/',
+    label: 'El universo Dängo',
+  },
 ];
 ---
 
-<section id="noticias" class="news-section">
-    <div class="container mx-auto px-4 pt-20 pb-10">
-        <!-- Section Header -->
-        <div class="mb-8">
-            <h2 class="section-title">
-                ENTERATE DE TODAS <br />
-                <span class="text-white">NUESTRAS ULTIMAS NOTICIAS</span>
-            </h2>
-        </div>
+<section id="noticias" class="news section-pad" aria-labelledby="news-title">
+  <div class="shell">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">04 / La comunidad sigue aquí</p><h2 id="news-title">
+          El ritual<br /><span class="pink">no se termina.</span>
+        </h2>
+      </div><a
+        class="text-link"
+        href={site.instagram}
+        target="_blank"
+        rel="noopener noreferrer"
+        >@festivaldango <span aria-hidden="true">↗</span></a>
     </div>
-
-    <!-- News Grid: Full Width, No Gap -->
-    <div
-        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 w-full gap-0"
-    >
-        {
-            newsItems.map((item, i) => {
-                // Logic to hide orphans on specific breakpoints
-                // Item index 4 (5th item): Hide on md (4 cols) -> Show on lg (5 cols)
-                // Item index 5 (6th item): Hide on md (4 cols) & lg (5 cols) -> Show on xl (6 cols)
-                let visibilityClass = "block";
-                if (i === 4) visibilityClass = "block md:hidden lg:block";
-                if (i === 5)
-                    visibilityClass = "block md:hidden lg:hidden xl:block";
-
-                return (
-                    <a 
-                        href={item.link} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        class={`news-item group ${visibilityClass}`}
-                    >
-                        <img 
-                            src={item.image} 
-                            alt={item.alt} 
-                            class="news-img"
-                            loading="lazy"
-                        />
-                        
-                        <!-- Hover Overlay -->
-                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <svg class="w-12 h-12 text-white fill-current drop-shadow-lg transform scale-0 group-hover:scale-100 transition-transform duration-300" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.069-4.85.069-3.204 0-3.584-.011-4.849-.069-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                            </svg>
-                        </div>
-                    </a>
-                );
-            })
-        }
+    <div class="news-grid">
+      {
+        posts.map((post) => (
+          <a
+            class="news-card"
+            href={post.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <>
+              <div class="news-image">
+                <ResponsiveImage
+                  src={`/images/ui/noticias/${post.image}`}
+                  alt=""
+                  sizes="(min-width: 700px) 31vw, 90vw"
+                />
+              </div>
+              <div class="news-caption">
+                <>
+                  <h3>{post.label}</h3>
+                  <span aria-hidden="true">↗</span>
+                </>
+              </div>
+            </>
+          </a>
+        ))
+      }
     </div>
+  </div>
 </section>
-
-<style>
-    .news-section {
-        min-height: 50vh; /* Adjust as needed, doesn't need to be full screen necessarily */
-        background-color: #000;
-        color: white;
-    }
-
-    .section-title {
-        font-family: var(--font-kismis);
-        font-size: clamp(2rem, 5vw, 4rem);
-        line-height: 1;
-        color: var(--color-dango-purple); /* Or specific color from design */
-        text-transform: uppercase;
-    }
-
-    .section-title span {
-        color: #fff;
-    }
-
-    .news-item {
-        aspect-ratio: 9 / 16; /* Taller vertical format (Story style) */
-        width: 100%;
-        background-color: #1a1a1a;
-        overflow: hidden;
-        /* Border removed for seamless look or keep strictly if "instagram style" implies separation? "No debe haber gap" implies seamless */
-        position: relative;
-        display: block;
-    }
-
-    .news-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s ease;
-    }
-
-    .news-item:hover .news-img {
-        transform: scale(1.1);
-    }
-</style>

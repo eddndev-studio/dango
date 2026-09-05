@@ -1,101 +1,39 @@
 ---
-import { Image } from 'astro:assets';
-
-// Links directos a las apps de navegación
-const googleMapsLink = "https://maps.app.goo.gl/U6Qg8WUuiFKTN9e5A";
-
+import { site } from '../data/site';
+import ResponsiveImage from './ResponsiveImage.astro';
 ---
 
-<section id="ubicacion" class="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-black py-20">
-    
-    <!-- Background Decorativo (Lineas Topográficas abstractas) -->
-    <div class="absolute inset-0 opacity-20 pointer-events-none">
-        <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path d="M0 100 C 20 0 50 0 100 100 Z" fill="none" stroke="url(#gradient-loc)" stroke-width="0.5" vector-effect="non-scaling-stroke"/>
-            <path d="M0 100 C 30 20 70 20 100 100 Z" fill="none" stroke="url(#gradient-loc)" stroke-width="0.5" vector-effect="non-scaling-stroke"/>
-            <path d="M0 100 C 40 40 60 40 100 100 Z" fill="none" stroke="url(#gradient-loc)" stroke-width="0.5" vector-effect="non-scaling-stroke"/>
-            <defs>
-                <linearGradient id="gradient-loc" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#8b5cf6" />
-                    <stop offset="100%" stop-color="#FF1493" />
-                </linearGradient>
-            </defs>
-        </svg>
+<section
+  id="ubicacion"
+  class="location section-pad"
+  aria-labelledby="location-title"
+>
+  <div class="shell location-grid">
+    <div>
+      <p class="eyebrow">03 / Nuestro punto de encuentro</p><h2
+        id="location-title"
+      >
+        La música tiene<br /><span class="pink">un lugar sagrado.</span>
+      </h2><p class="body-copy">
+        Teotihuacán pone el paisaje. Dängo, el ritmo. Un encuentro entre música,
+        arte y raíces en Rancho La Ventilla.
+      </p><address>
+        <strong>Rancho La Ventilla</strong><span>Puerta 3 · Teotihuacán</span
+        ><span>Estado de México, México</span>
+      </address><a
+        class="button button-outline"
+        href={site.maps}
+        target="_blank"
+        rel="noopener noreferrer"
+        >Abrir en Google Maps <span aria-hidden="true">↗</span></a>
     </div>
-
-    <div class="container mx-auto px-4 relative z-10">
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
-            
-            <!-- Texto / Info -->
-            <div class="text-center lg:text-left space-y-8 order-2 lg:order-1">
-                <div>
-                    <span class="text-dango-pink font-outfit tracking-[0.2em] text-sm uppercase mb-2 block">Ubicación</span>
-                    <h2 class="font-kismis text-5xl md:text-7xl text-white leading-none mb-6">
-                        RANCHO <br/>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-dango-pink">LA VENTILLA</span>
-                    </h2>
-                    <p class="text-gray-400 font-inter text-lg max-w-md mx-auto lg:mx-0 leading-relaxed">
-                        Un espacio místico a las faldas de las pirámides. 
-                        Donde la energía de Teotihuacán se encuentra con el sonido del futuro.
-                    </p>
-                    <div class="flex flex-col gap-2 mt-4 text-sm text-gray-500 font-inter">
-                        <p>Puerta 3, Rancho La Ventilla</p>
-                        <p>Teotihuacán, Edo. Méx.</p>
-                    </div>
-                </div>
-
-                <!-- Botones de Navegación -->
-                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                    <a href={googleMapsLink} target="_blank" rel="noopener noreferrer" 
-                       class="group relative px-8 py-4 bg-white/5 border border-white/10 rounded-xl overflow-hidden hover:border-dango-pink/50 transition-all duration-300">
-                        <div class="absolute inset-0 bg-dango-pink/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                        <span class="relative font-outfit font-bold text-white flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                            GOOGLE MAPS
-                        </span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Visual del Mapa (Tarjeta Interactiva) -->
-            <div class="order-1 lg:order-2 relative group perspective-1000">
-                <!-- Glow Effect -->
-                <div class="absolute -inset-4 bg-gradient-to-r from-dango-pink to-brand-purple rounded-3xl opacity-20 group-hover:opacity-40 blur-xl transition-opacity duration-500"></div>
-                
-                <!-- Card Container -->
-                <a href={googleMapsLink} target="_blank" rel="noopener noreferrer" 
-                   class="block relative rounded-2xl overflow-hidden border border-white/10 bg-[#111] aspect-[4/3] transform transition-transform duration-500 group-hover:scale-[1.02] group-hover:rotate-1">
-                    
-                    <!-- Imagen de fondo simulando mapa oscuro (Placeholder o Real) -->
-                    <!-- Usamos un div con gradiente por ahora, idealmente aquí va una captura de pantalla oscura del mapa -->
-                    <div class="absolute inset-0 bg-[url('/images/ui/Fondo.webp')] bg-cover bg-center opacity-40 grayscale group-hover:grayscale-0 transition-all duration-700"></div>
-                    
-                    <!-- Overlay Gradiente -->
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-
-                    <!-- Pin Fijo -->
-                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-                        <div class="relative">
-                            <div class="w-4 h-4 bg-dango-pink rounded-full relative shadow-[0_0_20px_#FF1493]"></div>
-                        </div>
-                        <div class="mt-4 bg-black/80 backdrop-blur px-4 py-2 rounded-full border border-white/10">
-                            <span class="text-xs font-bold text-white tracking-widest">VER EN MAPA</span>
-                        </div>
-                    </div>
-
-                    <!-- UI Elements decorativos -->
-                    <div class="absolute top-4 right-4 bg-white/10 backdrop-blur px-3 py-1 rounded text-[10px] text-white font-mono border border-white/5">
-                        25 KM DE CDMX
-                    </div>
-                </a>
-            </div>
-
-        </div>
-    </div>
+    <figure class="venue-photo">
+      <ResponsiveImage
+        src="/images/ui/Fondo.webp"
+        alt="Escenario al aire libre de Dängo al atardecer"
+      /><figcaption>
+        <span>RANCHO LA VENTILLA</span><span>TEOTIHUACÁN, MX</span>
+      </figcaption>
+    </figure>
+  </div>
 </section>
-
-<style>
-    .perspective-1000 {
-        perspective: 1000px;
-    }
-</style>
