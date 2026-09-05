@@ -46,7 +46,7 @@ GitHub Actions ejecuta instalación reproducible, build, revisión de tipos y ve
 
 Se conservan los secretos de repositorio existentes: `SSH_PRIVATE_KEY`, `SSH_HOST`, `SSH_USER` y `DEPLOY_PATH`. Nunca deben guardarse en archivos del proyecto.
 
-El servidor actual es nginx. Su configuración de caché, HTTP/2 y respuesta 404 se gestiona en el hosting, no mediante archivos `.htaccess`. No es necesario cambiar de proveedor para publicar este proyecto.
+El servidor actual es nginx. La configuración aplicada de caché, compresión, HTTP/2, redirecciones y respuesta 404 está versionada en `ops/nginx/festivaldango.com.conf`. Los cambios de esta configuración se aplican en el hosting tras guardar una copia y validar con `nginx -t`; el workflow publica únicamente `dist/`. Véase `docs/audit-2026-09-05.md` para el respaldo y la evidencia del despliegue.
 
 ## Licencia
 
