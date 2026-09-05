@@ -39,7 +39,7 @@ Las miniaturas usan `srcset`, dimensiones explícitas y carga diferida. La galer
 ## Movimiento e interacciones
 
 - Lenis 1.3.26 suaviza la rueda y las anclas. Conserva el gesto táctil nativo, el historial y el foco; su ciclo de animación solo se ejecuta durante el desplazamiento.
-- Las cuatro franjas gráficas se desplazan en ambos sentidos y admiten arrastre. Cada una usa dos copias, proporciones calculadas desde los SVG originales y transformaciones del navegador, sin un bucle de JavaScript permanente.
+- Las cuatro franjas gráficas ocupan todo el ancho visible de la pantalla, se desplazan en ambos sentidos y admiten arrastre. Cada una usa dos copias, proporciones calculadas desde los SVG originales y transformaciones del navegador, sin un bucle de JavaScript permanente.
 - El cartel recupera el fondo giratorio, las fotografías y colores al pasar el cursor o enfocar artistas, el paralaje y los corazones. Hay un máximo de 18 partículas simultáneas; se eliminan al terminar y al suspender el efecto.
 - Los efectos se pausan fuera de pantalla, con la pestaña oculta y al abrir un diálogo. La preferencia de movimiento reducido y el botón de pausa desactivan el movimiento y Lenis; la pausa manual se recuerda durante la sesión.
 - `src/scripts/motion.ts` coordina el estado; `smooth-scroll.ts` integra Lenis; `lineup.ts` contiene la interacción del cartel.

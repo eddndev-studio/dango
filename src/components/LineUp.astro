@@ -14,11 +14,13 @@ import IconSlider from './IconSlider.astro';
       </div><span class="edition-stamp">LINE UP<br /><strong>2026</strong></span
       >
     </div>
-    <IconSlider direction="right" />
-    <div class="artist-poster">
-      <div class="artist-sunburst" aria-hidden="true"></div>
-      <div class="artist-backdrop" aria-hidden="true"></div>
-      <div class="heart-cloud" aria-hidden="true"></div>
+  </div>
+  <IconSlider direction="right" />
+  <div class="artist-poster">
+    <div class="artist-sunburst" aria-hidden="true"></div>
+    <div class="artist-backdrop" aria-hidden="true"></div>
+    <div class="heart-cloud" aria-hidden="true"></div>
+    <div class="shell artist-poster-content">
       <div class="artist-list">
         {
           [1, 2, 3].map((tier) => (
@@ -55,8 +57,8 @@ import IconSlider from './IconSlider.astro';
         Rock, indie y sonidos urbanos. Una misma energía.
       </p>
     </div>
-    <IconSlider />
   </div>
+  <IconSlider />
 </section>
 <script>
   import '../scripts/lineup';

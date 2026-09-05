@@ -498,10 +498,13 @@ summary:focus-visible {
 .artist-poster {
   position: relative;
   isolation: isolate;
-  padding: 55px 20px 32px;
+  padding: 55px 0 32px;
   border-block: 1px solid var(--line);
   overflow: hidden;
   background: radial-gradient(ellipse at 50% 70%, #44244750, transparent 65%);
+}
+.artist-poster-content {
+  padding-inline: 20px;
 }
 .artist-backdrop {
   position: absolute;
@@ -1113,7 +1116,10 @@ address span {
     font-size: 2.45rem;
   }
   .artist-poster {
-    padding: 32px 8px 24px;
+    padding: 32px 0 24px;
+  }
+  .artist-poster-content {
+    padding-inline: 8px;
   }
   .tier-1 a {
     font-size: clamp(2.8rem, 13vw, 4.6rem);
