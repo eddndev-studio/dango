@@ -1,6 +1,7 @@
 ---
 import { artists } from '../data/site';
 import media from '../data/media.json';
+import IconSlider from './IconSlider.astro';
 ---
 
 <section id="lineup" class="lineup section-pad" aria-labelledby="lineup-title">
@@ -10,11 +11,14 @@ import media from '../data/media.json';
         <p class="eyebrow">01 / El sonido de Dängo</p><h2 id="lineup-title">
           Un cartel.<br /><span class="pink">Muchas formas de sentir.</span>
         </h2>
-      </div><span class="edition-stamp"
-        >LINE UP<br /><strong>2026</strong></span>
+      </div><span class="edition-stamp">LINE UP<br /><strong>2026</strong></span
+      >
     </div>
+    <IconSlider direction="right" />
     <div class="artist-poster">
+      <div class="artist-sunburst" aria-hidden="true"></div>
       <div class="artist-backdrop" aria-hidden="true"></div>
+      <div class="heart-cloud" aria-hidden="true"></div>
       <div class="artist-list">
         {
           [1, 2, 3].map((tier) => (
@@ -29,7 +33,7 @@ import media from '../data/media.json';
                     data-image={
                       media[
                         `/images/artistas/${artist.image}` as keyof typeof media
-                      ]?.full
+                      ]?.src
                     }
                   >
                     {artist.name}
@@ -39,29 +43,21 @@ import media from '../data/media.json';
           ))
         }
       </div>
+      <button
+        class="ritual-heart"
+        type="button"
+        aria-label="Siente el ritual: lanzar corazones"
+        hidden
+      >
+        <span aria-hidden="true">♥</span> Siente el ritual
+      </button>
       <p class="poster-note">
         Rock, indie y sonidos urbanos. Una misma energía.
       </p>
     </div>
+    <IconSlider />
   </div>
 </section>
 <script>
-  const backdrop = document.querySelector<HTMLElement>('.artist-backdrop');
-  const hover = matchMedia(
-    '(hover: hover) and (prefers-reduced-motion: no-preference)',
-  );
-  document
-    .querySelectorAll<HTMLAnchorElement>('.artist-list a')
-    .forEach((link) => {
-      const show = () => {
-        if (!backdrop || !hover.matches || !link.dataset.image) return;
-        backdrop.style.backgroundImage = `url("${link.dataset.image}")`;
-        backdrop.classList.add('visible');
-      };
-      const hide = () => backdrop?.classList.remove('visible');
-      link.addEventListener('mouseenter', show);
-      link.addEventListener('mouseleave', hide);
-      link.addEventListener('focus', show);
-      link.addEventListener('blur', hide);
-    });
+  import '../scripts/lineup';
 </script>

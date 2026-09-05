@@ -42,13 +42,19 @@ import { navigation, site } from '../data/site';
     </nav></noscript
   >
 </header>
-<dialog id="mobile-menu" class="menu-dialog" aria-label="Menú principal">
+<dialog
+  id="mobile-menu"
+  class="menu-dialog"
+  aria-label="Menú principal"
+  data-lenis-prevent
+>
   <div class="menu-top">
     <span class="eyebrow">Dängo · Teotihuacán</span><button
       type="button"
       class="icon-button"
       aria-label="Cerrar menú"
-      data-close-menu>×</button>
+      data-close-menu>×</button
+    >
   </div>
   <nav aria-label="Navegación móvil">
     {
@@ -67,8 +73,10 @@ import { navigation, site } from '../data/site';
   const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
   const menu = document.querySelector<HTMLDialogElement>('#mobile-menu');
   if (toggle && menu) {
+    let navigating = false;
     toggle.hidden = false;
     toggle.addEventListener('click', () => {
+      navigating = false;
       menu.showModal();
       document.documentElement.classList.add('modal-open');
       toggle.setAttribute('aria-expanded', 'true');
@@ -76,16 +84,20 @@ import { navigation, site } from '../data/site';
     menu
       .querySelector('[data-close-menu]')
       ?.addEventListener('click', () => menu.close());
-    menu
-      .querySelectorAll('a')
-      .forEach((link) => link.addEventListener('click', () => menu.close()));
+    menu.querySelectorAll('a').forEach((link) =>
+      link.addEventListener('click', () => {
+        navigating = true;
+        document.documentElement.classList.remove('modal-open');
+        menu.close();
+      }),
+    );
     menu.addEventListener('click', (event) => {
       if (event.target === menu) menu.close();
     });
     menu.addEventListener('close', () => {
       document.documentElement.classList.remove('modal-open');
       toggle.setAttribute('aria-expanded', 'false');
-      toggle.focus();
+      if (!navigating) toggle.focus({ preventScroll: true });
     });
     matchMedia('(min-width: 960px)').addEventListener('change', (event) => {
       if (event.matches && menu.open) menu.close();

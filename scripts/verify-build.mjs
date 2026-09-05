@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { load } from 'cheerio';
+import { gzipSync } from 'node:zlib';
 const root = path.resolve('dist');
 const origin = 'https://festivaldango.com';
 const pages = ['index.html', 'informacion/index.html', '404.html'];
@@ -128,6 +129,29 @@ const sitemap = fs.readFileSync(path.join(root, 'sitemap-0.xml'), 'utf8');
 assert.ok(sitemap.includes(`${origin}/informacion/`));
 assert.ok(!sitemap.includes('/404'));
 assert.ok(!sitemap.includes('dangofestival.com'));
+// Include shared chunks and Lenis: checking only inline scripts misses bundles.
+const bundles = fs
+  .readdirSync(path.join(root, '_astro'))
+  .filter((file) => file.endsWith('.js'));
+const browserCode = bundles.map((file) =>
+  fs.readFileSync(path.join(root, '_astro', file)),
+);
+const rawBytes = browserCode.reduce((total, code) => total + code.length, 0);
+const gzipBytes = browserCode.reduce(
+  (total, code) => total + gzipSync(code).length,
+  0,
+);
+assert.ok(
+  rawBytes < 35000,
+  `Browser bundle budget exceeded: ${rawBytes} bytes`,
+);
+assert.ok(
+  gzipBytes < 12000,
+  `Compressed browser bundle budget exceeded: ${gzipBytes} bytes`,
+);
+console.log(
+  `Browser bundles including Lenis: ${rawBytes} bytes / ${gzipBytes} bytes gzip.`,
+);
 console.log(
   `Verified ${pages.length} pages, ${linkCount} local links and ${imageCount} images: SEO, anchors, accessibility structure, content preservation and size budgets pass.`,
 );

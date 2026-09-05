@@ -1,18 +1,107 @@
 ---
-// Static decorative strip: no animation loop, repeated DOM, or layout measurements.
+interface Props {
+  direction?: 'left' | 'right';
+}
+const { direction = 'left' } = Astro.props;
+const sources = import.meta.glob<string>('../../public/icons/M*.svg', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
+const icons = Array.from({ length: 18 }, (_, i) => {
+  const src = `/icons/M${i + 1}.svg`;
+  const svg = sources[`../../public${src}`];
+  const [, width, height] = svg.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/)!;
+  return { src, width: Number(width), height: Number(height) };
+});
 ---
 
-<div class="icon-strip" aria-hidden="true">
-  {
-    Array.from({ length: 18 }, (_, i) => (
-      <img
-        src={`/icons/M${i + 1}.svg`}
-        alt=""
-        width="72"
-        height="48"
-        loading="lazy"
-        decoding="async"
-      />
-    ))
-  }
+<div class="icon-strip" data-direction={direction} aria-hidden="true">
+  <div class="icon-track">
+    {
+      [0, 1].map(() => (
+        <div class="icon-group">
+          {icons.map((icon) => (
+            <img
+              src={icon.src}
+              alt=""
+              width={icon.width}
+              height={icon.height}
+              style={`--icon-ratio: ${icon.width / icon.height}`}
+              loading="lazy"
+              decoding="async"
+              draggable="false"
+            />
+          ))}
+        </div>
+      ))
+    }
+  </div>
 </div>
+<script>
+  import { observeMotion, motionState } from '../scripts/motion';
+  document.querySelectorAll<HTMLElement>('.icon-strip').forEach((strip) => {
+    const track = strip.querySelector<HTMLElement>('.icon-track')!;
+    const group = strip.querySelector<HTMLElement>('.icon-group')!;
+    const duration = 36000;
+    const sign = strip.dataset.direction === 'right' ? -1 : 1;
+    const animation = track.animate(
+      [{ transform: 'translateX(0)' }, { transform: 'translateX(-50%)' }],
+      {
+        duration,
+        iterations: Infinity,
+        direction: sign === 1 ? 'normal' : 'reverse',
+        easing: 'linear',
+      },
+    );
+    let active = false,
+      hovering = false,
+      width = 1296;
+    let drag: { id: number; x: number; time: number } | undefined;
+    const sync = () =>
+      active && !hovering && !drag ? animation.play() : animation.pause();
+    observeMotion(strip, (value) => {
+      active = value;
+      sync();
+    });
+    new ResizeObserver(([entry]) => {
+      width = entry.contentRect.width;
+    }).observe(group);
+    strip.addEventListener('pointerenter', (event) => {
+      if (event.pointerType === 'mouse') {
+        hovering = true;
+        sync();
+      }
+    });
+    strip.addEventListener('pointerleave', () => {
+      hovering = false;
+      sync();
+    });
+    strip.addEventListener('pointerdown', (event) => {
+      if (!event.isPrimary || event.button !== 0 || !motionState().active)
+        return;
+      drag = {
+        id: event.pointerId,
+        x: event.clientX,
+        time: Number(animation.currentTime ?? 0),
+      };
+      strip.setPointerCapture(event.pointerId);
+      strip.classList.add('dragging');
+      sync();
+    });
+    strip.addEventListener('pointermove', (event) => {
+      if (!drag || drag.id !== event.pointerId || !width) return;
+      const time =
+        drag.time - ((event.clientX - drag.x) / width) * duration * sign;
+      animation.currentTime = ((time % duration) + duration) % duration;
+    });
+    const release = () => {
+      drag = undefined;
+      strip.classList.remove('dragging');
+      sync();
+    };
+    strip.addEventListener('pointerup', release);
+    strip.addEventListener('pointercancel', release);
+    strip.addEventListener('lostpointercapture', release);
+  });
+</script>

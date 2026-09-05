@@ -1,0 +1,222 @@
+html.lenis {
+  scroll-behavior: auto;
+}
+.motion-toggle {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #ffffff55;
+  border-radius: 50%;
+  background: #11110feb;
+  color: var(--ink);
+  font:
+    18px Arial,
+    sans-serif;
+}
+.motion-toggle:hover {
+  color: var(--pink);
+  border-color: var(--pink);
+}
+.icon-strip {
+  --strip-height: max(36px, 3.9vw);
+  height: var(--strip-height);
+  cursor: grab;
+  touch-action: pan-y pinch-zoom;
+  user-select: none;
+}
+.icon-strip.dragging {
+  cursor: grabbing;
+}
+.icon-track {
+  display: flex;
+  width: max-content;
+  flex-shrink: 0;
+}
+.icon-group {
+  display: flex;
+  min-width: 0;
+  flex-shrink: 0;
+}
+.icon-strip .icon-group img {
+  width: calc(var(--strip-height) * var(--icon-ratio));
+  min-width: 0;
+  max-width: none;
+  height: var(--strip-height);
+  flex: 0 0 auto;
+  object-fit: contain;
+  pointer-events: none;
+}
+.artist-poster {
+  --artist-color: var(--pink);
+}
+.artist-sunburst {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(1100px, 140%);
+  aspect-ratio: 1;
+  z-index: -2;
+  border-radius: 50%;
+  background: repeating-conic-gradient(
+    from 0deg,
+    #ff6abe 0deg 12deg,
+    transparent 12deg 24deg
+  );
+  mask-image: radial-gradient(
+    circle,
+    transparent 5%,
+    #000 12%,
+    #000 40%,
+    transparent 69%
+  );
+  opacity: 0.1;
+  transform: translate(-50%, -50%);
+  animation: ritual-turn 90s linear infinite;
+  animation-play-state: paused;
+  pointer-events: none;
+}
+.artist-poster[data-motion-active='true'] .artist-sunburst,
+.artist-poster[data-motion-active='true'] .ritual-heart span {
+  animation-play-state: running;
+}
+.artist-backdrop {
+  transition:
+    opacity 0.25s,
+    transform 0.3s ease-out;
+}
+.artist-tier a {
+  transition:
+    color 0.2s,
+    transform 0.25s;
+}
+.artist-tier a:hover,
+.artist-tier a:focus-visible,
+.tier-1 a:nth-child(2):hover {
+  color: var(--artist-color, var(--pink));
+}
+.artist-tier a:hover,
+.artist-tier a:focus-visible {
+  transform: rotate(-1deg) scale(1.035);
+}
+.heart-cloud {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+  contain: strict;
+}
+.heart-cloud span {
+  position: absolute;
+  line-height: 1;
+  font-family: Arial, sans-serif;
+}
+.ritual-heart {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 26px auto 0;
+  min-height: 44px;
+  padding: 5px 18px;
+  border: 1px solid #ff6abe55;
+  border-radius: 40px;
+  background: #11110f99;
+  color: var(--pink);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+.ritual-heart span {
+  display: inline-block;
+  font:
+    28px/1 Arial,
+    sans-serif;
+  animation: ritual-beat 2.4s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.ritual-heart:hover {
+  background: #ff6abe18;
+}
+.ritual-heart + .poster-note {
+  margin-top: 16px;
+}
+.hero-logo {
+  transition:
+    transform 0.5s cubic-bezier(0.2, 0.7, 0.3, 1),
+    color 0.3s;
+}
+.hero-center:hover .hero-logo {
+  transform: rotate(-1deg) scale(1.025);
+  color: var(--pink);
+}
+.hero-top span[aria-hidden] {
+  display: inline-block;
+}
+.hero[data-motion-active='true'] .hero-top span[aria-hidden] {
+  animation: star-turn 15s linear infinite;
+}
+.lightbox-image {
+  cursor: grab;
+  touch-action: pan-y pinch-zoom;
+  user-select: none;
+}
+.lightbox-image:active {
+  cursor: grabbing;
+}
+@keyframes ritual-turn {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+@keyframes star-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes ritual-beat {
+  0%,
+  30%,
+  100% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(1.18) rotate(-6deg);
+  }
+  20% {
+    transform: scale(1.05);
+  }
+}
+@media (max-width: 599px) {
+  .motion-toggle {
+    width: 40px;
+    height: 40px;
+  }
+}
+[data-motion-paused='true'] {
+  scroll-behavior: auto;
+}
+[data-motion-paused='true'] *,
+[data-motion-paused='true'] *::before,
+[data-motion-paused='true'] *::after {
+  animation-play-state: paused !important;
+  transition: none !important;
+}
+[data-motion-paused='true'] .hero-logo,
+[data-motion-paused='true'] .artist-tier a {
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-center:hover .hero-logo,
+  .artist-tier a:hover,
+  .artist-tier a:focus-visible {
+    transform: none;
+  }
+  .icon-strip {
+    cursor: default;
+  }
+}

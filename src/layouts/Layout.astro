@@ -1,7 +1,9 @@
 ---
 import '../styles/global.css';
+import '../styles/motion.css';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import Motion from '../components/Motion.astro';
 import { artists, site } from '../data/site';
 interface Props {
   title: string;
@@ -133,5 +135,6 @@ const graph = [
     <Navbar />
     <main id="contenido" tabindex="-1"><slot /></main>
     <Footer />
+    <Motion />
   </body>
 </html>

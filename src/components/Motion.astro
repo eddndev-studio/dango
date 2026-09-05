@@ -1,0 +1,22 @@
+---
+import 'lenis/dist/lenis.css';
+---
+
+<button
+  class="motion-toggle"
+  type="button"
+  aria-label="Pausar animaciones"
+  data-motion-toggle
+  hidden
+>
+  <span aria-hidden="true">Ⅱ</span>
+</button>
+<script>
+  import '../scripts/smooth-scroll';
+  import { observeMotion } from '../scripts/motion';
+  const hero = document.querySelector<HTMLElement>('.hero');
+  if (hero)
+    observeMotion(hero, (active) => {
+      hero.dataset.motionActive = String(active);
+    });
+</script>

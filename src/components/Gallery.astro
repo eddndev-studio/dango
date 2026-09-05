@@ -32,7 +32,8 @@ const entries = images.map((src, i) => ({
           {title}<span class="pink">.</span>
         </h2><p class="body-copy">{subtitle}</p>
       </div><span class="photo-count"
-        >{images.length} fotografías<br /><span>Archivo Dängo</span></span>
+        >{images.length} fotografías<br /><span>Archivo Dängo</span></span
+      >
     </div>
     <div class="photo-grid">
       {
@@ -96,13 +97,14 @@ const entries = images.map((src, i) => ({
       )
     }
   </div>
-  <dialog class="lightbox" aria-label={`Galería ${title}`}>
+  <dialog class="lightbox" aria-label={`Galería ${title}`} data-lenis-prevent>
     <div class="lightbox-top">
       <p class="lightbox-counter" role="status" aria-live="polite"></p><button
         class="icon-button"
         type="button"
         aria-label="Cerrar fotografía"
-        data-gallery-close>×</button>
+        data-gallery-close>×</button
+      >
     </div>
     <div class="lightbox-stage">
       <button
@@ -111,16 +113,19 @@ const entries = images.map((src, i) => ({
         aria-label="Fotografía anterior"
         data-gallery-prev>←</button
       ><figure>
-        <img class="lightbox-image" alt="" /><figcaption></figcaption>
+        <img class="lightbox-image" alt="" draggable="false" /><figcaption>
+        </figcaption>
       </figure><button
         type="button"
         class="icon-button"
         aria-label="Fotografía siguiente"
-        data-gallery-next>→</button>
+        data-gallery-next>→</button
+      >
     </div>
   </dialog>
 </section>
 <script>
+  import { motionState } from '../scripts/motion';
   document.querySelectorAll<HTMLElement>('.gallery').forEach((section) => {
     const dialog = section.querySelector<HTMLDialogElement>('dialog');
     const image = section.querySelector<HTMLImageElement>('.lightbox-image');
@@ -131,15 +136,52 @@ const entries = images.map((src, i) => ({
     );
     let current = 0;
     let trigger: HTMLAnchorElement | undefined;
+    let transition: Animation | undefined;
     if (!dialog || !image) return;
     const show = (index: number) => {
+      const direction = index < current ? -1 : 1;
+      transition?.cancel();
       current = (index + links.length) % links.length;
       const link = links[current];
       image.src = link.href;
       image.alt = link.querySelector('img')?.alt ?? '';
       if (caption) caption.textContent = image.alt;
       if (counter) counter.textContent = `${current + 1} / ${links.length}`;
+      if (motionState().enabled && dialog.open) {
+        transition = image.animate(
+          [
+            { opacity: 0.35, transform: `translateX(${direction * 28}px)` },
+            { opacity: 1, transform: 'translateX(0)' },
+          ],
+          { duration: 240, easing: 'ease-out' },
+        );
+      }
     };
+    // Leave vertical scrolling and pinch zoom native; recognize horizontal swipes only.
+    let touch: { id: number; x: number; y: number } | undefined;
+    image.addEventListener('pointerdown', (event) => {
+      if (!event.isPrimary || event.button !== 0) {
+        touch = undefined;
+        return;
+      }
+      touch = { id: event.pointerId, x: event.clientX, y: event.clientY };
+      image.setPointerCapture(event.pointerId);
+    });
+    image.addEventListener('pointerup', (event) => {
+      if (touch && event.pointerId === touch.id) {
+        const dx = event.clientX - touch.x,
+          dy = event.clientY - touch.y;
+        if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5)
+          show(current + (dx < 0 ? 1 : -1));
+      }
+      touch = undefined;
+    });
+    image.addEventListener('pointercancel', () => {
+      touch = undefined;
+    });
+    image.addEventListener('lostpointercapture', () => {
+      touch = undefined;
+    });
     links.forEach((link, index) =>
       link.addEventListener('click', (event) => {
         if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)
@@ -178,6 +220,8 @@ const entries = images.map((src, i) => ({
         dialog.close();
     });
     dialog.addEventListener('close', () => {
+      transition?.cancel();
+      touch = undefined;
       document.documentElement.classList.remove('modal-open');
       image.removeAttribute('src');
       trigger?.focus({ preventScroll: true });

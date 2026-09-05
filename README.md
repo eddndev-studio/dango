@@ -15,7 +15,7 @@ npm ci
 npm run dev
 ```
 
-Astro genera HTML estático. El sitio usa CSS propio, tipografías locales WOFF2 y JavaScript pequeño para el menú y las galerías. Las interacciones principales conservan alternativas sin JavaScript.
+Astro genera HTML estático. El sitio usa CSS propio, tipografías locales WOFF2, Lenis y animaciones nativas del navegador. Las interacciones principales conservan alternativas sin JavaScript.
 
 ```sh
 npm run build   # Genera las imágenes adaptativas y el sitio en dist/
@@ -34,7 +34,17 @@ npm run preview
 - `public/media/` y `src/data/media.json`: resultados generados, excluidos de Git.
 - `scripts/build-social.mjs`: genera la tarjeta social de 1200 × 630 a partir del logotipo vectorial original. Ejecutar después de modificar esa composición.
 
-Las miniaturas usan `srcset`, dimensiones explícitas y carga diferida. La galería abre una versión de mayor tamaño solo cuando se solicita. El menú y los visores usan diálogos nativos, foco controlado y cierre con Escape; los visores también admiten flechas. La preferencia de movimiento reducido desactiva transiciones.
+Las miniaturas usan `srcset`, dimensiones explícitas y carga diferida. La galería abre una versión de mayor tamaño solo cuando se solicita. El menú y los visores usan diálogos nativos, foco controlado y cierre con Escape; los visores también admiten flechas y deslizamiento horizontal.
+
+## Movimiento e interacciones
+
+- Lenis 1.3.26 suaviza la rueda y las anclas. Conserva el gesto táctil nativo, el historial y el foco; su ciclo de animación solo se ejecuta durante el desplazamiento.
+- Las cuatro franjas gráficas se desplazan en ambos sentidos y admiten arrastre. Cada una usa dos copias, proporciones calculadas desde los SVG originales y transformaciones del navegador, sin un bucle de JavaScript permanente.
+- El cartel recupera el fondo giratorio, las fotografías y colores al pasar el cursor o enfocar artistas, el paralaje y los corazones. Hay un máximo de 18 partículas simultáneas; se eliminan al terminar y al suspender el efecto.
+- Los efectos se pausan fuera de pantalla, con la pestaña oculta y al abrir un diálogo. La preferencia de movimiento reducido y el botón de pausa desactivan el movimiento y Lenis; la pausa manual se recuerda durante la sesión.
+- `src/scripts/motion.ts` coordina el estado; `smooth-scroll.ts` integra Lenis; `lineup.ts` contiene la interacción del cartel.
+
+`npm run verify` comprueba también todos los bundles del navegador, incluidos los compartidos y Lenis: presupuesto de 35 KB sin comprimir y 12 KB con gzip, además del límite de HTML e inline scripts.
 
 ## SEO
 
