@@ -840,11 +840,13 @@ address span {
   color: var(--muted);
   font-size: 0.66rem;
 }
-.studio-credit strong {
+.studio-credit a {
   color: var(--ink);
+}
+.studio-credit strong {
   font-weight: 400;
 }
-.studio-credit:hover strong {
+.studio-credit a:hover {
   color: var(--pink);
 }
 /* Information */
